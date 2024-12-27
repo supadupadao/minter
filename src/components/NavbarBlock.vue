@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ConnectWallet from './ConnectWallet.vue';
 import LocaleChoose from './LocaleChoose.vue';
 </script>
 
@@ -32,13 +33,7 @@ import LocaleChoose from './LocaleChoose.vue';
       <div class="navbar-end">
         <LocaleChoose />
 
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary">
-              <strong>{{ $t('message.Navbar.ConnectWallet') }}</strong>
-            </a>
-          </div>
-        </div>
+        <ConnectWallet />
       </div>
     </div>
   </nav>

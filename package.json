@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@tonconnect/ui": "2.0.9",
     "vue": "3.5.13",
     "vue-i18n": "10.0.5",
     "vue-router": "4.5.0"

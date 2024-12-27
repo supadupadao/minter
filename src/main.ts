@@ -6,6 +6,7 @@ import router from './router'
 import { createI18n } from 'vue-i18n';
 import i18nRU from "@/i18n/ru.json";
 import i18nEN from "@/i18n/en.json";
+import { TonConnectUI } from '@tonconnect/ui';
 
 const i18n = createI18n({
   locale: 'en',
@@ -17,6 +18,11 @@ const i18n = createI18n({
 });
 
 const app = createApp(App)
+
+window.location
+app.config.globalProperties.$tonConnectUI = new TonConnectUI({
+    manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
+});
 
 app.use(router)
 app.use(i18n)
