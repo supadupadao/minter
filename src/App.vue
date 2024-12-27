@@ -11,7 +11,7 @@ import { RouterView } from 'vue-router'
     </div>
     <div class="hero-body">
       <div class="section">
-        <h1 class="title">{{ $route.name }}</h1>
+        <h1 class="title">{{ $t(`message.pageTitles.${$route.name!!.toString()}`) }}</h1>
         <RouterView />
       </div>
     </div>

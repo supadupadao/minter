@@ -1,5 +1,5 @@
 <template>
   <div class="content">
-    <p>About website bla bla bla.</p>
+    <p>{{ $t('message.AboutPage.AboutText') }}.</p>
   </div>
 </template>

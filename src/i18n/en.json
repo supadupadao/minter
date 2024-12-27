@@ -1,0 +1,37 @@
+{
+  "message": {
+    "pageTitles": {
+      "NewJetton": "Deploy new jetton",
+      "About": "About"
+    },
+    "Navbar": {
+      "Home": "Home",
+      "More": "More",
+      "About": "About us",
+      "ConnectWallet": "Connect wallet"
+    },
+    "Footer": {
+      "WebsiteLicense": "Website source code is licensed under {license}.",
+      "ContractLicense": "Smart contracts code is licensed under {license}.",
+      "LicenseText": "License text"
+    },
+    "NewJettonForm": {
+      "JettonName_Label": "Jetton name",
+      "JettonName_Placeholder": "e.g. SupaDupaJetton",
+      "JettonName_HelpText": "It will be full name of jetton",
+      "JettonSymbol_Label": "Symbol",
+      "JettonSymbol_Placeholder": "e.g. JTTN",
+      "JettonSymbol_HelpText": "Short jetton code for wallets. Usually couple of symbols",
+      "JettonDescription_Label": "Description",
+      "JettonDescription_Placeholder": "This is the best token in The Open Network!!!",
+      "JettonDescription_HelpText": "Description of your jetton",
+      "JettonMaxSupply_Label": "Max supply",
+      "JettonMaxSupply_Placeholder": "1337",
+      "JettonMaxSupply_HelpText": "How many tokens will be allowed to mint",
+      "DeployJetton": "Deploy"
+    },
+    "AboutPage": {
+      "AboutText": "us..."
+    }
+  }
+}

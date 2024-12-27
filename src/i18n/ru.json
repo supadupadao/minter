@@ -1,0 +1,37 @@
+{
+  "message": {
+    "pageTitles": {
+      "NewJetton": "Деплой нового жетона",
+      "About": "О нас"
+    },
+    "Navbar": {
+      "Home": "Главная",
+      "More": "Еще",
+      "About": "О нас",
+      "ConnectWallet": "Подключить кошелек"
+    },
+    "Footer": {
+      "WebsiteLicense": "Этот вебсайт лицензирован под лицензией {license}.",
+      "ContractLicense": "Смарт контракт жетона лицензирован под лицензией {license}.",
+      "LicenseText": "Текст лицензии"
+    },
+    "NewJettonForm": {
+      "JettonName_Label": "Название жетона",
+      "JettonName_Placeholder": "напр. SupaDupaJetton",
+      "JettonName_HelpText": "Полное имя жетона",
+      "JettonSymbol_Label": "Символ жетона",
+      "JettonSymbol_Placeholder": "напр. JTTN",
+      "JettonSymbol_HelpText": "Короткий код жетона, используется в списке жетонов в кошельке",
+      "JettonDescription_Label": "Описание",
+      "JettonDescription_Placeholder": "Это самый лучший токен в сети TON!!!",
+      "JettonDescription_HelpText": "Описание вашего будущего токена",
+      "JettonMaxSupply_Label": "Максимальный саплай",
+      "JettonMaxSupply_Placeholder": "100500",
+      "JettonMaxSupply_HelpText": "Как много токенов будет позволено сминтить",
+      "DeployJetton": "Деплой"
+    },
+    "AboutPage": {
+      "AboutText": "..."
+    }
+  }
+}

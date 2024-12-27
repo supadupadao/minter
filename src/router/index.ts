@@ -6,7 +6,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Deploy new jetton',
+      name: 'NewJetton',
       component: NewJetton,
     },
     {

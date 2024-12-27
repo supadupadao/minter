@@ -1,39 +1,39 @@
 <template>
   <form>
     <div class="field">
-      <label class="label">Jetton name</label>
+      <label class="label">{{ $t("message.NewJettonForm.JettonName_Label") }}</label>
       <div class="control">
-        <input class="input" type="text" placeholder="e.g. SupaDupaJetton">
+        <input class="input" type="text" :placeholder="$t('message.NewJettonForm.JettonName_Placeholder')">
       </div>
-      <p class="help">It will be full name of jetton</p>
+      <p class="help">{{ $t("message.NewJettonForm.JettonName_HelpText") }}</p>
     </div>
 
     <div class="field">
-      <label class="label">Symbol</label>
+      <label class="label">{{ $t("message.NewJettonForm.JettonSymbol_Label") }}</label>
       <div class="control">
-        <input class="input" type="text" placeholder="e.g. JTTN">
+        <input class="input" type="text" :placeholder="$t('message.NewJettonForm.JettonSymbol_Placeholder')">
       </div>
-      <p class="help">Short jetton code for wallets. Usually couple of symbols</p>
+      <p class="help">{{ $t("message.NewJettonForm.JettonSymbol_HelpText") }}</p>
     </div>
 
     <div class="field">
-      <label class="label">Description</label>
+      <label class="label">{{ $t("message.NewJettonForm.JettonDescription_Label") }}</label>
       <div class="control">
-        <textarea class="textarea" placeholder="This is the best token in The Open Network!!!"></textarea>
+        <textarea class="textarea" :placeholder="$t('message.NewJettonForm.JettonDescription_Placeholder')"></textarea>
       </div>
-      <p class="help">Description of your jetton</p>
+      <p class="help">{{ $t("message.NewJettonForm.JettonDescription_HelpText") }}</p>
     </div>
 
     <div class="field">
-      <label class="label">Max supply</label>
+      <label class="label">{{ $t("message.NewJettonForm.JettonMaxSupply_Label") }}</label>
       <div class="control">
-        <input class="input" type="number" placeholder="100500">
+        <input class="input" type="number" :placeholder="$t('message.NewJettonForm.JettonMaxSupply_Placeholder')">
       </div>
-      <p class="help">How many tokens will be allowed to mint</p>
+      <p class="help">{{ $t("message.NewJettonForm.JettonMaxSupply_HelpText") }}</p>
     </div>
 
     <div class="control">
-      <button class="button is-link">Deploy</button>
+      <button class="button is-link">{{ $t("message.NewJettonForm.DeployJetton") }}</button>
     </div>
   </form>
 </template>
