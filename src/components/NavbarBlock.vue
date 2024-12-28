@@ -1,17 +1,20 @@
-<script setup lang="ts">
-import ConnectWallet from './ConnectWallet.vue';
-import LocaleChoose from './LocaleChoose.vue';
-</script>
-
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <p><i>SupaDupa</i><b>Minter</b></p>
       </a>
+
+      <a role="button" class="navbar-burger" v-bind:class="{ 'is-active': isBurgerActive }" @click="toggleBurgerActive"
+        data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navMenu" class="navbar-menu" v-bind:class="{ 'is-active': isBurgerActive }">
       <div class="navbar-start">
         <RouterLink to="/" class="navbar-item">
           {{ $t('message.Navbar.Home') }}
@@ -38,3 +41,24 @@ import LocaleChoose from './LocaleChoose.vue';
     </div>
   </nav>
 </template>
+
+<script lang="ts">
+import ConnectWallet from './ConnectWallet.vue';
+import LocaleChoose from './LocaleChoose.vue';
+
+export default {
+  components: {
+    ConnectWallet, LocaleChoose,
+  },
+  data() {
+    return {
+      isBurgerActive: false
+    }
+  },
+  methods: {
+    toggleBurgerActive() {
+      this.isBurgerActive = !this.isBurgerActive;
+    }
+  }
+}
+</script>
