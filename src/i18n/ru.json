@@ -8,7 +8,8 @@
       "Home": "Главная",
       "More": "Еще",
       "About": "О нас",
-      "ConnectWallet": "Подключить кошелек"
+      "ConnectWallet": "Подключить кошелек",
+      "Disconnect": "Выход"
     },
     "Footer": {
       "WebsiteLicense": "Этот вебсайт лицензирован под лицензией {license}.",

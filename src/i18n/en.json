@@ -8,7 +8,8 @@
       "Home": "Home",
       "More": "More",
       "About": "About us",
-      "ConnectWallet": "Connect wallet"
+      "ConnectWallet": "Connect wallet",
+      "Disconnect": "Disconnect"
     },
     "Footer": {
       "WebsiteLicense": "Website source code is licensed under {license}.",

@@ -1,12 +1,18 @@
 <template>
-  <div class="navbar-item">
+  <div v-if="!isConnected.value" class="navbar-item">
     <div class="buttons">
-      <a v-if="!isConnected.value" class="button is-primary" @click="openModal">
+      <a class="button is-primary" @click="openModal">
         <strong>{{ $t('message.Navbar.ConnectWallet') }}</strong>
       </a>
-      <a v-else class="button is-info" @click="openModal">
-        <strong>{{ isConnected.address }}</strong>
-      </a>
+    </div>
+  </div>
+  <div v-else class="navbar-item has-dropdown is-hoverable">
+    <a class="navbar-link button is-info">
+      {{ isConnected.address }}
+    </a>
+
+    <div class="navbar-dropdown">
+      <a class="navbar-item" @click="disconnect">{{ $t('message.Navbar.Disconnect') }}</a>
     </div>
   </div>
 </template>
@@ -42,6 +48,10 @@ export default {
   methods: {
     openModal() {
       this.$tonConnectUI.openModal();
+    },
+    disconnect() {
+      this.$tonConnectUI.disconnect();
+      this.isConnected.value = false;
     }
   }
 }
