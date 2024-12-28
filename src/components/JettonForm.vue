@@ -57,12 +57,13 @@ export default {
   },
   methods: {
     deployToken(payload: MouseEvent) {
+      const account = this.$tonConnectUI.account?.address;
       const codeCell = Cell.fromBase64(JettonMasterData.code);
       const systemCell = Cell.fromBase64(JettonMasterData.system);
       const initData = beginCell()
         .storeRef(systemCell)
         .storeUint(0, 1)
-        .storeAddress(Address.parse(this.$tonConnectUI.account?.address!))
+        .storeAddress(Address.parse(account!))
         .endCell();
       const jettonInit = beginCell()
         .storeUint(0x133701, 32)
