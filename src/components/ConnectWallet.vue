@@ -11,8 +11,16 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import type { TonConnectUI } from '@tonconnect/ui';
 import { reactive } from 'vue';
+
+declare module "@vue/runtime-core" {
+  interface ComponentCustomProperties {
+    $tonConnectUI: TonConnectUI,
+  }
+}
+
 
 export default {
   setup() {
@@ -27,7 +35,7 @@ export default {
     this.$tonConnectUI.onStatusChange(
       walletAndwalletInfo => {
         this.isConnected.value = true;
-        this.isConnected.address = walletAndwalletInfo.account.address.substring(0, 10) + "...";
+        this.isConnected.address = walletAndwalletInfo?.account.address.substring(0, 10) + "...";
       }
     );
   },

@@ -16,14 +16,12 @@ const i18n = createI18n({
     ru: i18nRU,
   },
 });
-
-const app = createApp(App)
-
-window.location
-app.config.globalProperties.$tonConnectUI = new TonConnectUI({
+const tonConnectUI =  new TonConnectUI({
     manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
 });
 
+const app = createApp(App)
+app.config.globalProperties.$tonConnectUI = tonConnectUI;
 app.use(router)
 app.use(i18n)
 
