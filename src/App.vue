@@ -10,7 +10,7 @@ import { RouterView } from 'vue-router'
       <NavbarBlock />
     </div>
     <div class="hero-body">
-      <div class="section">
+      <div class="container is-fluid">
         <h1 class="title">{{ $t(`message.pageTitles.${$route.name!!.toString()}`) }}</h1>
         <RouterView />
       </div>

@@ -8,12 +8,14 @@
       "Home": "Home",
       "More": "More",
       "About": "About us",
-      "ConnectWallet": "Connect wallet"
+      "ConnectWallet": "Connect wallet",
+      "Disconnect": "Disconnect"
     },
     "Footer": {
       "WebsiteLicense": "Website source code is licensed under {license}.",
       "ContractLicense": "Smart contracts code is licensed under {license}.",
-      "LicenseText": "License text"
+      "LicenseText": "License text",
+      "OurLinks": "Our links"
     },
     "NewJettonForm": {
       "JettonName_Label": "Jetton name",
@@ -28,7 +30,18 @@
       "JettonMaxSupply_Label": "Max supply",
       "JettonMaxSupply_Placeholder": "1337",
       "JettonMaxSupply_HelpText": "How many tokens will be allowed to mint",
-      "DeployJetton": "Deploy"
+      "DeployJetton": "Deploy 🚀"
+    },
+    "NewJettonCards":{
+      "WhatIsIt": {
+        "Title": "What is it?",
+        "Description": "This is tool that helps to deploy your own token (Jetton) in The Open Network blockchain."
+      },
+      "OpenSource": {
+        "Title": "Open Source",
+        "Description": "Both of jetton and website source codes are free and open!",
+        "LinkText": "View source codes"
+      }
     },
     "AboutPage": {
       "AboutText": "us..."
