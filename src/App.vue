@@ -9,9 +9,8 @@ import { RouterView } from 'vue-router'
     <div class="hero-head">
       <NavbarBlock />
     </div>
-    <div class="hero-body">
-      <div class="container is-fluid">
-        <h1 class="title">{{ $t(`message.pageTitles.${$route.name!!.toString()}`) }}</h1>
+    <div class="hero-body p-0">
+      <div class="container is-fluid p-3">
         <RouterView />
       </div>
     </div>

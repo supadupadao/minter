@@ -5,9 +5,7 @@
       "About": "About"
     },
     "Navbar": {
-      "Home": "Home",
       "More": "More",
-      "About": "About us",
       "ConnectWallet": "Connect wallet",
       "Disconnect": "Disconnect"
     },
@@ -33,18 +31,31 @@
       "DeployJetton": "Deploy 🚀"
     },
     "NewJettonCards":{
+      "WorkInProgress": {
+        "Title": "Work in progress!",
+        "Description": "Be careful! This application uses <b>Testnet</b> version of TON Blockchain. Because it's not 100% ready yet.",
+        "LinkText": "If you found bug or typo please open an issue in Github"
+      },
       "WhatIsIt": {
         "Title": "What is it?",
-        "Description": "This is tool that helps to deploy your own token (Jetton) in The Open Network blockchain."
+        "Description": "Using this tool you can create your own token in The Open Network blockchain.<h3>How?</h3><ul><li>At first you need to connect your TON wallet.</li><li>Come up with name and description for your future token, fill in the fields in form and press \"Deploy\" button</li><li>You will need to pay a small network fee, after which your token will be created</li></ul>"
+      },
+      "Decentralized": {
+        "Title": "100% On-Chain",
+        "Description": "Jetton is designed to store <b>full</b> metadata in blockchain.<br />It means that your jetton is not depends from hostings status.<br />Metadata stores directly in TON storage. So your jetton will depend only from TON blockchain."
+      },
+      "Managable": {
+        "Title": "Easy manageable",
+        "Description": "It is good for DAO because this smart contract have flexible API for jetton management"
       },
       "OpenSource": {
         "Title": "Open Source",
-        "Description": "Both of jetton and website source codes are free and open!",
+        "Description": "Both of jetton and website source codes are free and open and published in our Github repos! If you want, you can help to improve this application",
         "LinkText": "View source codes"
       }
     },
     "AboutPage": {
-      "AboutText": "us..."
+      "AboutText": "WORK IN PROGRESS"
     }
   }
 }

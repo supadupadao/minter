@@ -17,7 +17,7 @@
     <div id="navMenu" class="navbar-menu" v-bind:class="{ 'is-active': isBurgerActive }">
       <div class="navbar-start">
         <RouterLink to="/" class="navbar-item">
-          {{ $t('message.Navbar.Home') }}
+          {{ $t('message.pageTitles.NewJetton') }}
         </RouterLink>
 
         <div class="navbar-item has-dropdown is-hoverable">
@@ -27,7 +27,7 @@
 
           <div class="navbar-dropdown">
             <RouterLink to="/about" class="navbar-item">
-              {{ $t('message.Navbar.About') }}
+              {{ $t('message.pageTitles.About') }}
             </RouterLink>
           </div>
         </div>
