@@ -1,11 +1,9 @@
 <template>
-  <article class="message" :class="bulmaColor">
-    <div class="message-body">
-      <h1 class="title">{{ emoji }} {{ title }}</h1>
-      <p>{{ description }}</p>
-      <a v-if="linkUrl" :href="linkUrl" target="_blank">{{ linkText }}</a>
-    </div>
-  </article>
+  <div class="content">
+    <h2 class="subtitle">{{ emoji }} {{ title }}</h2>
+    <p v-html="description"></p>
+    <a v-if="linkUrl" :href="linkUrl" target="_blank">{{ linkText }}</a>
+  </div>
 </template>
 
 <script lang="ts">
@@ -16,7 +14,6 @@ export default {
     description: String,
     linkText: String,
     linkUrl: String,
-    bulmaColor: String,
   }
 }
 </script>
