@@ -5,9 +5,7 @@
       "About": "About"
     },
     "Navbar": {
-      "Home": "Home",
       "More": "More",
-      "About": "About us",
       "ConnectWallet": "Connect wallet",
       "Disconnect": "Disconnect"
     },
@@ -57,7 +55,7 @@
       }
     },
     "AboutPage": {
-      "AboutText": "us..."
+      "AboutText": "WORK IN PROGRESS"
     }
   }
 }
