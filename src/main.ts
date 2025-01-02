@@ -8,6 +8,7 @@ import i18nRU from "@/i18n/ru.json";
 import i18nEN from "@/i18n/en.json";
 import { TonConnectUI } from '@tonconnect/ui';
 import { TonClient } from 'ton';
+import { getHttpEndpoint } from '@orbs-network/ton-access';
 
 const i18n = createI18n({
   locale: 'en',
@@ -20,8 +21,11 @@ const i18n = createI18n({
 const tonConnectUI = new TonConnectUI({
     manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
 });
+const endpoint = await getHttpEndpoint({
+  network: "testnet",
+}); 
 const tonClient = new TonClient({
-  endpoint: "https://testnet.toncenter.com/api/v2/jsonRPC",
+  endpoint,
 });
 
 const app = createApp(App)

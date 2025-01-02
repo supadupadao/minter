@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@orbs-network/ton-access": "^2.3.3",
     "@tonconnect/ui": "2.0.9",
     "buffer": "6.0.3",
     "ton": "13.9.0",
