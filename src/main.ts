@@ -8,26 +8,37 @@ import i18nRU from "@/i18n/ru.json";
 import i18nEN from "@/i18n/en.json";
 import { TonConnectUI } from '@tonconnect/ui';
 import { TonClient } from 'ton';
+import { getHttpEndpoint } from '@orbs-network/ton-access';
 
-const i18n = createI18n({
-  locale: 'en',
-  fallbackLocale: 'en',
-  messages: {
-    en: i18nEN,
-    ru: i18nRU,
-  },
-});
-const tonConnectUI = new TonConnectUI({
-    manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
-});
-const tonClient = new TonClient({
-  endpoint: "https://testnet.toncenter.com/api/v2/jsonRPC",
-});
+const app = createApp(App);
 
-const app = createApp(App)
-app.config.globalProperties.$tonConnectUI = tonConnectUI;
-app.config.globalProperties.$tonClient = tonClient;
-app.use(router)
-app.use(i18n)
+(async () => {
+  app.use(router)
 
-app.mount('#app')
+  const i18n = createI18n({
+    locale: 'en',
+    fallbackLocale: 'en',
+    messages: {
+      en: i18nEN,
+      ru: i18nRU,
+    },
+  });
+  app.use(i18n);
+
+  const tonConnectUI = new TonConnectUI({
+      manifestUrl: `${window.location.origin}/tonconnect-manifest.json`,
+  });
+
+  app.config.globalProperties.$tonConnectUI = tonConnectUI;
+
+  const endpoint = await getHttpEndpoint({
+    network: "testnet",
+  }); 
+  const tonClient = new TonClient({
+    endpoint,
+  });
+
+  app.config.globalProperties.$tonClient = tonClient;
+
+  app.mount('#app')
+})();
