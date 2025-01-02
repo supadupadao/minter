@@ -4,7 +4,7 @@
     <div class="field has-addons">
       <div class="control is-expanded">
         <input v-model="address" class="input is-large" type="text"
-          placeholder="UQCjb5hhRggCJMKnfnxDHlvNMGLboRzTYA8XQKvfOmg08wNo">
+          placeholder="0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT">
       </div>
       <div class="control">
         <button class="button is-info is-large" @click="$router.push('/manage/' + address)">
