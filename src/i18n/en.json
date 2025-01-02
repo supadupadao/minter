@@ -2,6 +2,7 @@
   "message": {
     "pageTitles": {
       "NewJetton": "Deploy new jetton",
+      "ManageJetton": "Manage existing jetton",
       "About": "About"
     },
     "Navbar": {
@@ -54,8 +55,20 @@
         "LinkText": "View source codes"
       }
     },
+    "JettonSearch": {
+      "FindJetton": "Find jetton by address",
+      "SearchButton": "Search"
+    },
+    "JettonManage": {
+      "DifferentContract": "This jetton is not deployed via this website. So it may have different logic and this website may display its data incorrectly.",
+      "AdminAddress": "Admin address",
+      "TotalSupply": "Total supply"
+    },
     "AboutPage": {
       "AboutText": "WORK IN PROGRESS"
+    },
+    "Common": {
+      "Warning": "Warning!"
     }
   }
 }

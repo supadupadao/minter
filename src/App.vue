@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import NavbarBlock from "@/components/NavbarBlock.vue"
-import FooterBlock from "@/components/FooterBlock.vue"
-import { RouterView } from 'vue-router'
-</script>
-
 <template>
   <section class="hero is-fullheight">
     <div class="hero-head">
@@ -19,3 +13,23 @@ import { RouterView } from 'vue-router'
     </div>
   </section>
 </template>
+
+<script lang="ts">
+import type { TonConnectUI } from '@tonconnect/ui';
+import type { TonClient } from 'ton';
+import NavbarBlock from './components/NavbarBlock.vue';
+import FooterBlock from './components/FooterBlock.vue';
+
+declare module "@vue/runtime-core" {
+  interface ComponentCustomProperties {
+    $tonConnectUI: TonConnectUI,
+    $tonClient: TonClient,
+  }
+}
+
+export default {
+  components: {
+    NavbarBlock, FooterBlock
+  }
+}
+</script>
