@@ -1,7 +1,8 @@
 {
   "message": {
     "pageTitles": {
-      "NewJetton": "Деплой нового жетона",
+      "NewJetton": "Новый жетон",
+      "ManageJetton": "Редактировать жетон",
       "About": "О нас"
     },
     "Navbar": {
@@ -54,8 +55,20 @@
         "LinkText": "Посмотреть исходный код"
       }
     },
+    "JettonSearch": {
+      "FindJetton": "Найти жеттон по адресу",
+      "SearchButton": "Поиск"
+    },
+    "JettonManage": {
+      "DifferentContract": "Этот жеттон создан не с помощью этого вебсайта. Поэтому он может иметь иную логику и его данные могут неправильно отображаться на сайте.",
+      "AdminAddress": "Адрес владельца",
+      "TotalSupply": "Общее предложение"
+    },
     "AboutPage": {
       "AboutText": "В РАЗРАБОТКЕ"
+    },
+    "Common": {
+      "Warning": "Внимание!"
     }
   }
 }

@@ -18,15 +18,7 @@
 </template>
 
 <script lang="ts">
-import type { TonConnectUI } from '@tonconnect/ui';
 import { reactive } from 'vue';
-
-declare module "@vue/runtime-core" {
-  interface ComponentCustomProperties {
-    $tonConnectUI: TonConnectUI,
-  }
-}
-
 
 export default {
   setup() {

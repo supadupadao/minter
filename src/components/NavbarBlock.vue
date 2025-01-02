@@ -20,6 +20,10 @@
           {{ $t('message.pageTitles.NewJetton') }}
         </RouterLink>
 
+        <RouterLink to="/manage" class="navbar-item">
+          {{ $t('message.pageTitles.ManageJetton') }}
+        </RouterLink>
+
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             {{ $t('message.Navbar.More') }}
