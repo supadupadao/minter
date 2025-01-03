@@ -37,7 +37,7 @@
       </div>
       <div class="cell is-col-span-3-desktop">
         <div class="box is-shadowless has-background-light">
-          <JettonManageForm ref="manageForm" :types="(abi.types || [])" />
+          <JettonManageForm ref="manageForm" :types="(abi.types || [])" :provider="provider" />
         </div>
       </div>
       <div class="cell is-col-span-1-desktop">
@@ -69,13 +69,13 @@ import JettonOperationsItemReceiver from '@/components/JettonOperationsItemRecei
 import { parseMetadata } from '@/utils/dict';
 import { SupaDupaJettonMaster } from '@/utils/jettonMaster';
 import type { JettonMasterData, MetadataDict } from '@/utils/types';
-import type { ContractABI, TonClient } from 'ton';
+import type { ContractABI, ContractProvider, TonClient } from 'ton';
 import { Address, Cell } from 'ton-core';
 import jettonMasterABI from "@/assets/JettonMaster.abi.json";
 import JettonOperationsItemGetter from '@/components/JettonOperationsItemGetter.vue';
 import JettonManageForm from '@/components/JettonManageForm.vue';
 
-async function initJettonMetadata(tonClient: TonClient, address: Address): Promise<{ isCorrectInterface: boolean, parsedMetadata: MetadataDict, jettonData: JettonMasterData }> {
+async function initJettonMetadata(tonClient: TonClient, address: Address) {
   let isCorrectInterface = true;
 
   // Getting contract state
@@ -103,6 +103,7 @@ async function initJettonMetadata(tonClient: TonClient, address: Address): Promi
     isCorrectInterface,
     parsedMetadata: await parseMetadata(jettonData.content),
     jettonData,
+    provider,
   }
 }
 
@@ -117,16 +118,18 @@ export default {
       jettonData: {} as JettonMasterData,
       parsedMetadata: {} as MetadataDict,
       isCorrectInterface: true,
+      provider: {} as ContractProvider,
     }
   },
   async created() {
     const address = Address.parse(this.$route.params.address as string);
 
     // Parse jetton metadata
-    const { isCorrectInterface, jettonData, parsedMetadata } = await initJettonMetadata(this.$tonClient, address);
+    const { isCorrectInterface, jettonData, parsedMetadata, provider } = await initJettonMetadata(this.$tonClient, address);
     this.isCorrectInterface = isCorrectInterface;
     this.jettonData = jettonData;
     this.parsedMetadata = parsedMetadata;
+    this.provider = provider;
 
     this.loading = false;
   }
