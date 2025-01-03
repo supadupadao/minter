@@ -6,6 +6,7 @@
       "About": "About"
     },
     "Navbar": {
+      "Home": "Home",
       "More": "More",
       "ConnectWallet": "Connect wallet",
       "Disconnect": "Disconnect"
