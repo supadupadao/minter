@@ -63,7 +63,14 @@
     "JettonManage": {
       "DifferentContract": "This jetton is not deployed via this website. So it may have different logic and this website may display its data incorrectly.",
       "AdminAddress": "Admin address",
-      "TotalSupply": "Total supply"
+      "TotalSupply": "Total supply",
+      "Receivers": "Receivers",
+      "Internals": "Internal messages",
+      "Externals": "External messages",
+      "Getters": "Getters",
+      "Legend": "Legend",
+      "ChooseOperation": "Jetton management tool",
+      "DefaultText": "Choose operation which you want to execute to jetton contract"
     },
     "AboutPage": {
       "AboutText": "WORK IN PROGRESS"
