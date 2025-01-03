@@ -6,6 +6,7 @@
       "About": "О нас"
     },
     "Navbar": {
+      "Home": "Главная",
       "More": "Еще",
       "ConnectWallet": "Подключить кошелек",
       "Disconnect": "Выход"

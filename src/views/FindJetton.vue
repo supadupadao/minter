@@ -1,5 +1,4 @@
 <template>
-  <h1 class="title">{{ $t('message.JettonSearch.FindJetton') }}</h1>
   <form>
     <div class="field has-addons">
       <div class="control is-expanded">

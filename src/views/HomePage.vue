@@ -2,6 +2,12 @@
   <div
     class="fixed-grid has-1-cols-mobile has-1-cols-tablet has-4-cols-desktop has-4-cols-widescreen has-4-cols-fullhd">
     <div class="grid is-gap-1">
+      <div class="cell is-col-span-4-desktop is-row-span-4-desktop">
+        <div class="box container is-fliud is-shadowless has-background-light">
+          <h1 class="title">{{ $t('message.JettonSearch.FindJetton') }}</h1>
+          <FindJetton />
+        </div>
+      </div>
       <div class="cell is-col-span-3-desktop is-row-span-4-desktop">
         <div class="box container is-fliud is-shadowless has-background-light">
           <h1 class="title">{{ $t('message.pageTitles.NewJetton') }}</h1>
@@ -62,4 +68,5 @@
 import CardItem from '@/components/CardItem.vue';
 import JettonExample from '@/components/JettonExample.vue';
 import JettonForm from '@/components/JettonForm.vue';
+import FindJetton from './FindJetton.vue';
 </script>
