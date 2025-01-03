@@ -1,39 +1,22 @@
-# Minter frontend
+# [Jetton](https://github.com/supadupadao/jetton) minter web app
 
-This template should help get you started developing with Vue 3 in Vite.
+[![Deploy status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/static.yml?label=deploy)](https://github.com/supadupadao/minter/actions/workflows/static.yml)
+[![Build status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/build.yml?label=build)](https://github.com/supadupadao/minter/actions/workflows/build.yml)
+[![GitHub License](https://img.shields.io/github/license/supadupadao/minter)](https://github.com/supadupadao/minter/blob/master/LICENSE)
 
-## Recommended IDE Setup
+ℹ️ Web application for deploying and management TON Jettons. This application is based on our [Jetton](https://github.com/supadupadao/jetton) implementation
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+⚠️ <b>Warning!</b> Application is actively work in progress. It could work not well
 
-## Type Support for `.vue` Imports in TS
+❤️ Any contributions are welcome. Feel free to open pull requests, issues, bug reports, feature proposals or anything else
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+🌍 Last version of application automatically deploys at [minter.supadupa.space](https://minter.supadupa.space)
 
-## Customize configuration
+# Development
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+This is default Tact blueprint project with default commands:
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- `npm i` - install dependencies and setup project
+- `npm run dev` - run development web server with hot reaload compilation
+- `npm run build` - check types and compile for production
+- `npm run lint` - run [ESLint](https://eslint.org)
