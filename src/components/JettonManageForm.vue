@@ -47,6 +47,8 @@ export default {
       if (this.abi.type == "receiver" && this.abi.receiver.message.kind == "typed") {
         return this.abi.receiver.message.type
       }
+
+      return null
     },
     inputs() {
       const result = [] as InputItem[];

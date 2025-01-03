@@ -37,7 +37,7 @@
       </div>
       <div class="cell is-col-span-3-desktop">
         <div class="box is-shadowless has-background-light">
-          <JettonManageForm ref="manageForm" :types="(abi.types as ABIType[])" />
+          <JettonManageForm ref="manageForm" :types="(abi.types || [])" />
         </div>
       </div>
       <div class="cell is-col-span-1-desktop">
@@ -69,7 +69,7 @@ import JettonOperationsItemReceiver from '@/components/JettonOperationsItemRecei
 import { parseMetadata } from '@/utils/dict';
 import { SupaDupaJettonMaster } from '@/utils/jettonMaster';
 import type { JettonMasterData, MetadataDict } from '@/utils/types';
-import type { ABIType, ContractABI, TonClient } from 'ton';
+import type { ContractABI, TonClient } from 'ton';
 import { Address, Cell } from 'ton-core';
 import jettonMasterABI from "@/assets/JettonMaster.abi.json";
 import JettonOperationsItemGetter from '@/components/JettonOperationsItemGetter.vue';
