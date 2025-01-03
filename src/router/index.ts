@@ -1,6 +1,5 @@
-import FindJetton from '@/views/FindJetton.vue'
 import ManageJetton from '@/views/ManageJetton.vue'
-import Home from '@/views/Home.vue'
+import HomePage from '@/views/HomePage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -9,7 +8,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: HomePage,
     },
     {
       path: "/manage/:address",

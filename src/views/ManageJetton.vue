@@ -22,13 +22,13 @@
           <aside class="menu">
             <p class="menu-label">Receivers</p>
             <ul class="menu-list">
-              <li v-for="receiver in abi.receivers">
+              <li v-bind:key="index" v-for="(receiver, index) in abi.receivers">
                 <JettonOperationsItemReceiver :receiver="receiver" />
               </li>
             </ul>
             <p class="menu-label">Getters</p>
             <ul class="menu-list">
-              <li v-for="getter in abi.getters">
+              <li v-bind:key="index" v-for="(getter, index) in abi.getters">
                 <JettonOperationsItemGetter :getter="getter" />
               </li>
             </ul>
