@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "@orbs-network/ton-access": "^2.3.3",
     "@tonconnect/ui": "2.0.9",
     "buffer": "6.0.3",
