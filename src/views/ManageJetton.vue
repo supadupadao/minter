@@ -20,16 +20,16 @@
       <div class="cell is-col-span-1-desktop">
         <div class="box is-shadowless has-background-light">
           <aside class="menu">
-            <p class="menu-label">Receivers</p>
+            <p class="menu-label">{{ $t("message.JettonManage.Receivers") }}</p>
             <ul class="menu-list">
               <li v-bind:key="index" v-for="(receiver, index) in abi.receivers">
-                <JettonOperationsItemReceiver :receiver="receiver" />
+                <JettonOperationsItemReceiver :receiver="receiver" @click="$refs.manageForm?.setReceiver(receiver)" />
               </li>
             </ul>
-            <p class="menu-label">Getters</p>
+            <p class="menu-label">{{ $t("message.JettonManage.Getters") }}</p>
             <ul class="menu-list">
               <li v-bind:key="index" v-for="(getter, index) in abi.getters">
-                <JettonOperationsItemGetter :getter="getter" />
+                <JettonOperationsItemGetter :getter="getter" @click="$refs.manageForm?.setGetter(getter)" />
               </li>
             </ul>
           </aside>
@@ -37,7 +37,26 @@
       </div>
       <div class="cell is-col-span-3-desktop">
         <div class="box is-shadowless has-background-light">
-          <JettonManageForm />
+          <JettonManageForm ref="manageForm" :types="(abi.types || [])" />
+        </div>
+      </div>
+      <div class="cell is-col-span-1-desktop">
+        <div class="box is-shadowless has-background-light">
+          <h3 class="subtitle">{{ $t("message.JettonManage.Legend") }}</h3>
+          <span class="icon has-text-danger is-medium">
+            <i class="fa-solid fa-circle"></i>
+          </span>
+          <span> - {{ $t("message.JettonManage.Internals") }}</span>
+          <br />
+          <span class="icon has-text-warning is-medium">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </span>
+          <span> - {{ $t("message.JettonManage.Externals") }}</span>
+          <br />
+          <span class="icon has-text-success is-medium">
+            <i class="fa-regular fa-circle"></i>
+          </span>
+          <span> - {{ $t("message.JettonManage.Getters") }}</span>
         </div>
       </div>
     </div>
@@ -89,7 +108,7 @@ async function initJettonMetadata(tonClient: TonClient, address: Address): Promi
 
 export default {
   components: {
-    JettonCardBig, JettonOperationsItemReceiver, JettonOperationsItemGetter, JettonManageForm
+    JettonCardBig, JettonOperationsItemReceiver, JettonOperationsItemGetter, JettonManageForm,
   },
   data() {
     return {

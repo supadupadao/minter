@@ -10,7 +10,7 @@
         <h1 class="title">{{ parsedMetadata.name }} ({{ parsedMetadata.symbol }})</h1>
         <p>{{ parsedMetadata.description }}</p>
         <p><strong>{{ $t('message.JettonManage.AdminAddress') }}</strong>: <a
-            :href="`https://testnet.tonviewer.com/${jettonData.adminAddress.toString()}`" target="_blank">{{
+            :href="`https://testnet.tonviewer.com/${jettonData.adminAddress?.toString()}`" target="_blank">{{
               jettonData.adminAddress
             }}</a>
         </p>
