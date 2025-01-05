@@ -196,7 +196,7 @@ export default {
         return;
       }
 
-      let tx = beginCell();
+      const tx = beginCell();
 
       if (type.header) {
         tx.storeUint(type.header, 32);
