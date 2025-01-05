@@ -64,16 +64,16 @@
 </template>
 
 <script lang="ts">
-import JettonCardBig from '@/components/JettonCardBig.vue';
-import JettonOperationsItemReceiver from '@/components/JettonOperationsItemReceiver.vue';
+import JettonCardBig from '@/components/JettonManage/JettonCardBig.vue';
+import JettonOperationsItemReceiver from '@/components/JettonManage/JettonOperationsItemReceiver.vue';
 import { parseMetadata } from '@/utils/dict';
 import { SupaDupaJettonMaster } from '@/utils/jettonMaster';
 import type { JettonMasterData, MetadataDict } from '@/utils/types';
 import type { ContractABI, ContractProvider, TonClient } from 'ton';
 import { Address, Cell } from 'ton-core';
 import jettonMasterABI from "@/assets/JettonMaster.abi.json";
-import JettonOperationsItemGetter from '@/components/JettonOperationsItemGetter.vue';
-import JettonManageForm from '@/components/JettonManageForm.vue';
+import JettonOperationsItemGetter from '@/components/JettonManage/JettonOperationsItemGetter.vue';
+import JettonManageForm from '@/components/JettonManage/JettonManageForm.vue';
 
 async function initJettonMetadata(tonClient: TonClient, address: Address) {
   let isCorrectInterface = true;
