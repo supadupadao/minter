@@ -1,62 +1,55 @@
 <template>
   <form>
-    <div class="field">
-      <label class="label">{{ $t("message.NewJettonForm.JettonName_Label") }}</label>
-      <div class="control">
-        <input v-model="jettonName" class="input" type="text"
-          :placeholder="$t('message.NewJettonForm.JettonName_Placeholder')">
-      </div>
-      <p class="help">{{ $t("message.NewJettonForm.JettonName_HelpText") }}</p>
-    </div>
+    <StringField ref="jettonName" :label="$t('message.NewJettonForm.JettonName_Label')"
+      :help-text="$t('message.NewJettonForm.JettonName_HelpText')"
+      :placeholder="$t('message.NewJettonForm.JettonName_Placeholder')" :required="true" />
 
-    <div class="field">
-      <label class="label">{{ $t("message.NewJettonForm.JettonSymbol_Label") }}</label>
-      <div class="control">
-        <input v-model="jettonSymbol" class="input" type="text"
-          :placeholder="$t('message.NewJettonForm.JettonSymbol_Placeholder')">
-      </div>
-      <p class="help">{{ $t("message.NewJettonForm.JettonSymbol_HelpText") }}</p>
-    </div>
+    <StringField ref="jettonSymbol" :label="$t('message.NewJettonForm.JettonSymbol_Label')"
+      :help-text="$t('message.NewJettonForm.JettonSymbol_HelpText')"
+      :placeholder="$t('message.NewJettonForm.JettonSymbol_Placeholder')" :required="true" />
 
-    <div class="field">
-      <label class="label">{{ $t("message.NewJettonForm.JettonDescription_Label") }}</label>
-      <div class="control">
-        <textarea v-model="jettonDescription" class="textarea"
-          :placeholder="$t('message.NewJettonForm.JettonDescription_Placeholder')"></textarea>
-      </div>
-      <p class="help">{{ $t("message.NewJettonForm.JettonDescription_HelpText") }}</p>
-    </div>
+    <StringField ref="jettonDescription" :label="$t('message.NewJettonForm.JettonDescription_Label')"
+      :help-text="$t('message.NewJettonForm.JettonDescription_HelpText')"
+      :placeholder="$t('message.NewJettonForm.JettonDescription_Placeholder')" :required="true" input-type="textarea" />
 
-    <div class="field">
-      <label class="label">{{ $t("message.NewJettonForm.JettonMaxSupply_Label") }}</label>
-      <div class="control">
-        <input v-model="maxSupply" class="input" type="number"
-          :placeholder="$t('message.NewJettonForm.JettonMaxSupply_Placeholder')">
-      </div>
-      <p class="help">{{ $t("message.NewJettonForm.JettonMaxSupply_HelpText") }}</p>
-    </div>
+    <CoinsField ref="maxSupply" :label="$t('message.NewJettonForm.JettonMaxSupply_Label')"
+      :help-text="$t('message.NewJettonForm.JettonMaxSupply_HelpText')"
+      :placeholder="$t('message.NewJettonForm.JettonMaxSupply_Placeholder')" :required="true" />
 
     <div class="control">
       <button class="button is-link" @click="deployToken">{{ $t("message.NewJettonForm.DeployJetton") }}</button>
     </div>
+
+    <p><span class="has-text-danger">*</span> - {{ $t("message.Common.requiredField") }}</p>
   </form>
 </template>
 
 <script lang="ts">
 import { Address, beginCell, Cell, contractAddress, toNano } from 'ton';
 import JettonMasterData from "@/assets/JettonMaster.json";
+import StringField from '../Fields/StringField.vue';
+import BaseField from '../Fields/BaseField.vue';
+import CoinsField from '../Fields/CoinsField.vue';
 
 export default {
-  setup() {
-    return {
-      jettonName: null as string | null,
-      jettonSymbol: null as string | null,
-      jettonDescription: null as string | null,
-      maxSupply: null as number | null,
-    }
+  components: {
+    StringField, CoinsField
   },
   methods: {
     deployToken(payload: MouseEvent) {
+      payload.preventDefault();
+
+      // Validate
+      const validations = [
+        (this.$refs.jettonName as typeof BaseField).validate(),
+        (this.$refs.jettonSymbol as typeof BaseField).validate(),
+        (this.$refs.jettonDescription as typeof BaseField).validate(),
+        (this.$refs.maxSupply as typeof BaseField).validate(),
+      ];
+      if (validations.filter(item => !item).length > 0) {
+        return false;
+      }
+
       const account = this.$tonConnectUI.account?.address;
       const codeCell = Cell.fromBase64(JettonMasterData.code);
       const systemCell = Cell.fromBase64(JettonMasterData.system);
@@ -68,10 +61,10 @@ export default {
       const jettonInit = beginCell()
         .storeUint(0x133701, 32)
         .storeUint(0, 64)
-        .storeStringRefTail(this.jettonName!)
-        .storeStringRefTail(this.jettonDescription!)
-        .storeStringRefTail(this.jettonSymbol!)
-        .storeCoins(this.maxSupply!)
+        .store((this.$refs.jettonName as typeof BaseField).store)
+        .store((this.$refs.jettonDescription as typeof BaseField).store)
+        .store((this.$refs.jettonSymbol as typeof BaseField).store)
+        .store((this.$refs.maxSupply as typeof BaseField).store)
         .endCell();
 
       const address = contractAddress(0, {
