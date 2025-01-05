@@ -3,13 +3,11 @@
 </template>
 
 <script lang="ts">
-import type { Builder } from 'ton-core';
-import TextAreaInput from '../Inputs/TextAreaInput.vue';
 import TextInput from '../Inputs/TextInput.vue';
 
 export default {
   components: {
-    TextInput, TextAreaInput
+    TextInput
   },
   props: {
     required: {
@@ -29,7 +27,7 @@ export default {
     validate(): boolean {
       return (this.$refs.input as typeof TextInput).validate();
     },
-    store(_: Builder): void {
+    store(): void {
 
     }
   }
