@@ -57,6 +57,7 @@ export default {
         .storeRef(systemCell)
         .storeUint(0, 1)
         .storeAddress(Address.parse(account!))
+        .storeInt(Math.floor(Date.now() / 1000), 257)
         .endCell();
       const jettonInit = beginCell()
         .storeUint(0x133701, 32)
