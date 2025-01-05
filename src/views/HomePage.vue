@@ -11,7 +11,7 @@
       <div class="cell is-col-span-3-desktop is-row-span-4-desktop">
         <div class="box container is-fliud is-shadowless has-background-light">
           <h1 class="title">{{ $t('message.pageTitles.NewJetton') }}</h1>
-          <JettonForm />
+          <JettonDeployForm />
         </div>
       </div>
       <div class="cell">
@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
 import CardItem from '@/components/CardItem.vue';
-import JettonExample from '@/components/JettonExample.vue';
-import JettonForm from '@/components/JettonForm.vue';
+import JettonExample from '@/components/JettonDeploy/JettonExample.vue';
+import JettonDeployForm from '@/components/JettonDeploy/JettonDeployForm.vue';
 import FindJetton from './FindJetton.vue';
 </script>
