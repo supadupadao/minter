@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import type { Builder } from 'ton-core';
+import { beginCell, type Builder } from 'ton-core';
 import BaseInput from '../Inputs/BaseInput.vue';
 import TextAreaInput from '../Inputs/TextAreaInput.vue';
 import TextInput from '../Inputs/TextInput.vue';
@@ -28,7 +28,7 @@ export default {
       return (this.$refs.input as typeof BaseInput).validate()
     },
     store(builder: Builder): void {
-      builder.storeStringRefTail((this.$refs.input as typeof TextInput).value)
+      builder.storeRef(beginCell().storeStringRefTail((this.$refs.input as typeof TextInput).value).asCell())
     }
   }
 }
