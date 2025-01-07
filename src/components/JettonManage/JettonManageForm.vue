@@ -97,6 +97,9 @@ export default {
       refItems: [] as BaseFieldElement[],
     }
   },
+  beforeUpdate() {
+    this.refItems = [];
+  },
   computed: {
     title() {
       if (this.abi.type == "getter") {
@@ -110,7 +113,6 @@ export default {
       return null
     },
     inputs(): InputItem[] {
-      this.refItems = new Array();
       const result = [] as InputItem[];
 
       if (this.abi.type == "getter" && this.abi.getter.arguments) {
