@@ -17,7 +17,7 @@
           {{ $t('message.JettonManage.NoSourceCode') }}
         </div>
       </div>
-      <div class="cell is-col-span-4-desktop">
+      <div v-if="jettonData && parsedMetadata" class="cell is-col-span-4-desktop">
         <div class="box is-shadowless has-background-light">
           <JettonCardBig :is-correct-interface="isCorrectInterface" :jetton-data="jettonData"
             :parsed-metadata="parsedMetadata" />
@@ -152,27 +152,35 @@ async function initJettonMetadata(tonClient: TonClient, address: Address) {
   // Getting contract state
   const contractState = await tonClient.getContractState(address); // TODO add error handling
 
+  if (contractState.state == "uninitialized") {
+    return null
+  }
+
   // Getting toncenter provider
   const code = Cell.fromBase64(contractState.code?.toString("base64") as string);
   const data = Cell.fromBase64(contractState.data?.toString("base64") as string);
   const provider = tonClient.provider(address, { code, data });
 
-  // Open jetton master contract
-  const jettonMaster = new SupaDupaJettonMaster(address);
-  const contract = tonClient.open(jettonMaster);
-
+  let jettonData = null;
+  let parsedMetadata = null
   try {
+    // Open jetton master contract
+    const jettonMaster = new SupaDupaJettonMaster(address);
+    const contract = tonClient.open(jettonMaster);
+
     // Execute jetton supported_interfaces getter
     const interfaces = await contract.supportedInterfaces(provider);
     isCorrectInterface = interfaces.includes(0xc26445264d7dbe48b97b619da755d205n);
+
+    jettonData = await contract.jettonData(provider);
+    parsedMetadata = await parseMetadata(jettonData.content);
   } catch {
     isCorrectInterface = false;
   }
-  const jettonData = await contract.jettonData(provider);
 
   return {
     isCorrectInterface,
-    parsedMetadata: await parseMetadata(jettonData.content),
+    parsedMetadata,
     jettonData,
     provider,
     abi: await getSources(code.hash(), tonClient)
@@ -187,8 +195,8 @@ export default {
     return {
       abi: {} as ContractABI,
       loading: true,
-      jettonData: {} as JettonMasterData,
-      parsedMetadata: {} as MetadataDict,
+      jettonData: null as JettonMasterData | null,
+      parsedMetadata: null as MetadataDict | null,
       isCorrectInterface: true,
       isSourceCodeProvided: true,
       provider: {} as ContractProvider,
@@ -198,16 +206,19 @@ export default {
     const address = Address.parse(this.$route.params.address as string);
 
     // Parse jetton metadata
-    const { isCorrectInterface, jettonData, parsedMetadata, provider, abi } = await initJettonMetadata(this.$tonClient, address);
-    this.isCorrectInterface = isCorrectInterface;
-    this.jettonData = jettonData;
-    this.parsedMetadata = parsedMetadata;
-    this.provider = provider;
-    if (abi) {
-      this.abi = abi as ContractABI;
-    } else {
-      this.isSourceCodeProvided = false;
-      this.abi = jettonMasterABI as ContractABI;
+    const result = await initJettonMetadata(this.$tonClient, address)
+    if (result) {
+      const { isCorrectInterface, jettonData, parsedMetadata, provider, abi } = result;
+      this.isCorrectInterface = isCorrectInterface;
+      this.jettonData = jettonData;
+      this.parsedMetadata = parsedMetadata;
+      this.provider = provider;
+      if (abi) {
+        this.abi = abi as ContractABI;
+      } else {
+        this.isSourceCodeProvided = false;
+        this.abi = jettonMasterABI as ContractABI;
+      }
     }
 
     this.loading = false;
