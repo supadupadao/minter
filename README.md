@@ -1,10 +1,10 @@
-# [Jetton](https://github.com/supadupadao/jetton) minter web app
+# SupaDupaMinter
 
 [![Deploy status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/static.yml?label=deploy)](https://github.com/supadupadao/minter/actions/workflows/static.yml)
 [![Build status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/build.yml?label=build)](https://github.com/supadupadao/minter/actions/workflows/build.yml)
 [![GitHub License](https://img.shields.io/github/license/supadupadao/minter)](https://github.com/supadupadao/minter/blob/master/LICENSE)
 
-ℹ️ Web application for deploying and management TON Jettons.
+ℹ️ Web application for deploying jettons and interacting with TON smart contracts.
 
 ❤️ Any contributions are welcome. Feel free to open pull requests, issues, bug reports, feature proposals or anything else
 
@@ -16,7 +16,7 @@
 
 Using this application you can deploy new TON Jetton. This application is based on our Jetton standard implementation written in [Tact language](https://tact-lang.org). This implementation build with goal to store full metadata on-chain and be usable with DAO. [More about this jetton implementation you can read in it's repo](https://github.com/supadupadao/jetton)
 
-🎚️ **Contract dev tools**:
+🎚️ **Smart contract dev tools**:
 
 This application provides functionality to interact with TON smart contracts. Application fetch contract ABI uploaded using [TON Verifier](https://verifier.ton.org) from IPFS and generate UI for it. At the moment application works only with verified contracts, but in future it will be improved.
 
