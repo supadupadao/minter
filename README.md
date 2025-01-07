@@ -16,9 +16,11 @@
 
 Using this application you can deploy new TON Jetton. This application is based on our Jetton standard implementation written in [Tact language](https://tact-lang.org). This implementation build with goal to store full metadata on-chain and be usable with DAO. [More about this jetton implementation you can read in it's repo](https://github.com/supadupadao/jetton)
 
-🎚️ **Jetton management**:
+🎚️ **Contract dev tools**:
 
-This application provides functionality to manage your deployed jettons. [You can see example of this feature here](https://minter.supadupa.space/manage/kQC1I2HcAkUSfMCQCezbL9bVtC_kqnX-gQIToAqXJNTP7yVj)
+This application provides functionality to interact with TON smart contracts. Application fetch contract ABI uploaded using [TON Verifier](https://verifier.ton.org) from IPFS and generate UI for it. At the moment application works only with verified contracts, but in future it will be improved.
+
+[You can see example of jetton management here](https://minter.supadupa.space/manage/kQC1I2HcAkUSfMCQCezbL9bVtC_kqnX-gQIToAqXJNTP7yVj)
 
 # Translation
 
