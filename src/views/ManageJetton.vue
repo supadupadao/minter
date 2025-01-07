@@ -11,6 +11,12 @@
           {{ $t('message.JettonManage.DifferentContract') }}
         </div>
       </div>
+      <div v-if="!isSourceCodeProvided" class="cell is-col-span-4-desktop">
+        <div class="box is-shadowless has-background-warning-light">
+          <span class="tag is-warning">{{ $t('message.Common.Warning') }}</span>
+          {{ $t('message.JettonManage.NoSourceCode') }}
+        </div>
+      </div>
       <div class="cell is-col-span-4-desktop">
         <div class="box is-shadowless has-background-light">
           <JettonCardBig :is-correct-interface="isCorrectInterface" :jetton-data="jettonData"
@@ -75,6 +81,71 @@ import jettonMasterABI from "@/assets/JettonMaster.abi.json";
 import JettonOperationsItemGetter from '@/components/JettonManage/JettonOperationsItemGetter.vue';
 import JettonManageForm from '@/components/JettonManage/JettonManageForm.vue';
 
+// const ORBS_SOURCES_REGISTRY = Address.parse("EQD-BJSVUJviud_Qv7Ymfd3qzXdrmV525e3YDzWQoHIAiInL");
+const ORBS_SOURCES_REGISTRY_TESTNET = Address.parse("EQCsdKYwUaXkgJkz2l0ol6qT_WxeRbE_wBCwnEybmR0u5TO8");
+// const ORBS_IPFS_ENDPOINT = "https://files.orbs.network/ipfs/"
+const ORBS_IPFS_ENDPOINT_TESTNET = "https://tonsource-testnet.infura-ipfs.io/ipfs/";
+
+interface SourceItem {
+  url: string,
+  filename: string,
+}
+
+interface SourceResult {
+  sources: SourceItem[]
+}
+
+function bigIntFromBuffer(buffer: Buffer): bigint {
+  return BigInt(`0x${buffer.toString("hex")}`);
+}
+
+async function getSources(codeCellHash: Buffer, tonClient: TonClient) {
+  let abi = null
+  // Source provider
+  const contractState = await tonClient.getContractState(ORBS_SOURCES_REGISTRY_TESTNET); // TODO add error handling
+  const code = Cell.fromBase64(contractState.code?.toString("base64") as string);
+  const data = Cell.fromBase64(contractState.data?.toString("base64") as string);
+  const provider = tonClient.provider(ORBS_SOURCES_REGISTRY_TESTNET, { code, data });
+  const result = await provider.get("get_source_item_address", [
+    // {
+    //   type: "int",
+    //   value: bigIntFromBuffer(await sha256("orbs.com"))
+    // },
+    { // TODO ?
+      type: "int",
+      value: 17676787183715497356968962353312138049121632594906749996652211766711021743417n
+    },
+    {
+      type: "int",
+      value: bigIntFromBuffer(codeCellHash)
+    },
+  ]);
+
+  // Source contract
+  const address = result.stack.readAddress();
+  const sourceContractState = await tonClient.getContractState(address); // TODO add error handling
+  if (!sourceContractState.code) {
+    return null;
+  }
+  const sourceCode = Cell.fromBase64(sourceContractState.code?.toString("base64") as string);
+  const sourceData = Cell.fromBase64(sourceContractState.data?.toString("base64") as string);
+  const sourceProvider = tonClient.provider(address, { code: sourceCode, data: sourceData });
+  const sourceResult = await sourceProvider.get("get_source_item_data", []);
+  const contentCell = sourceResult.stack.skip(3).readCell().beginParse();
+  const ipfsLink = contentCell.loadStringTail();
+
+  const verifiedContract = await (await fetch(ipfsLink.replace("ipfs://", ORBS_IPFS_ENDPOINT_TESTNET))).json() as SourceResult;
+  for (const source of verifiedContract.sources) {
+    if (source.filename.endsWith(".abi")) {
+      const url = source.url.replace("ipfs://", ORBS_IPFS_ENDPOINT_TESTNET);
+      const content = await fetch(url).then((u) => u.json());
+      abi = content
+    }
+  }
+
+  return abi;
+}
+
 async function initJettonMetadata(tonClient: TonClient, address: Address) {
   let isCorrectInterface = true;
 
@@ -104,6 +175,7 @@ async function initJettonMetadata(tonClient: TonClient, address: Address) {
     parsedMetadata: await parseMetadata(jettonData.content),
     jettonData,
     provider,
+    abi: await getSources(code.hash(), tonClient)
   }
 }
 
@@ -113,11 +185,12 @@ export default {
   },
   data() {
     return {
-      abi: jettonMasterABI as ContractABI,
+      abi: {} as ContractABI,
       loading: true,
       jettonData: {} as JettonMasterData,
       parsedMetadata: {} as MetadataDict,
       isCorrectInterface: true,
+      isSourceCodeProvided: true,
       provider: {} as ContractProvider,
     }
   },
@@ -125,11 +198,17 @@ export default {
     const address = Address.parse(this.$route.params.address as string);
 
     // Parse jetton metadata
-    const { isCorrectInterface, jettonData, parsedMetadata, provider } = await initJettonMetadata(this.$tonClient, address);
+    const { isCorrectInterface, jettonData, parsedMetadata, provider, abi } = await initJettonMetadata(this.$tonClient, address);
     this.isCorrectInterface = isCorrectInterface;
     this.jettonData = jettonData;
     this.parsedMetadata = parsedMetadata;
     this.provider = provider;
+    if (abi) {
+      this.abi = abi as ContractABI;
+    } else {
+      this.isSourceCodeProvided = false;
+      this.abi = jettonMasterABI as ContractABI;
+    }
 
     this.loading = false;
   }
