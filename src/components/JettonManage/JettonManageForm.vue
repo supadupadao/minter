@@ -5,11 +5,17 @@
     {{ $t("message.JettonManage.DefaultText") }}
   </div>
 
-  <div class="field" v-for="(input, index) in inputs" v-bind:key="index">
-    <label class="label">{{ input.label }}</label>
-    <div class="control">
-      <input v-bind="input.bind" v-model="input.model" class="input">
-    </div>
+
+  <div v-for="(input, index) in inputs" v-bind:key="`${title}_${index}`">
+    <StringField v-if="input.type == 'string'" v-bind="input" :ref="el => refItems.push(el as BaseFieldElement)" />
+    <CoinsField v-else-if="input.type == 'uint' && input.format == 'coins'" v-bind="input"
+      :ref="el => refItems.push(el as BaseFieldElement)" />
+    <UintField v-else-if="input.type == 'uint'" v-bind="input" :ref="el => refItems.push(el as BaseFieldElement)" />
+    <SliceField v-else-if="input.type == 'slice'" v-bind="input" :ref="el => refItems.push(el as BaseFieldElement)" />
+    <AddressField v-else-if="input.type == 'address'" v-bind="input"
+      :ref="el => refItems.push(el as BaseFieldElement)" />
+    <BooleanField v-else-if="input.type == 'bool'" v-bind="input" :ref="el => refItems.push(el as BaseFieldElement)" />
+    <UnknownField v-else v-bind="input" :ref="el => refItems.push(el as BaseFieldElement)" />
   </div>
 
   <div v-if="abi.type == 'getter'" class="control">
@@ -28,20 +34,52 @@
 </template>
 
 <script lang="ts">
-import { Address, beginCell, toNano, type ABIGetter, type ABIReceiver, type ABIType, type ContractProvider, type TupleItem } from 'ton-core';
+import { beginCell, Builder, toNano, type ABIGetter, type ABIReceiver, type ABIType, type ContractProvider, type TupleItem } from 'ton-core';
+import StringField from '../Fields/StringField.vue';
+import CoinsField from '../Fields/CoinsField.vue';
+import UintField from '../Fields/UintField.vue';
+import UnknownField from '../Fields/UnknownField.vue';
+import SliceField from '../Fields/SliceField.vue';
+import AddressField from '../Fields/AddressField.vue';
+import BooleanField from '../Fields/BooleanField.vue';
+import type { CreateComponentPublicInstanceWithMixins } from 'vue';
 
-interface InputItem {
+type BaseFieldElement = CreateComponentPublicInstanceWithMixins<{
+  validate(): boolean,
+  store(builder: Builder): void,
+}>;
+
+interface BaseFieldInput {
+  optional: boolean,
   label: string,
-  type: string,
-  format: string | number | boolean | null | undefined;
-  bind: {
-    type: string,
-    placeholder: string
-  },
-  model: string,
+  placeholder?: string
+  helpText?: string
 }
 
+type AnyFieldInput = { type: "any" } & BaseFieldInput;
+type EmptyFieldInput = { type: "empty" } & BaseFieldInput;
+type TextFieldInput = { type: "text" } & BaseFieldInput;
+type CoinsFieldInput = { type: "uint", format: "coins" } & BaseFieldInput;
+type UintFieldInput = { type: "uint", format: number } & BaseFieldInput;
+type StringFieldInput = { type: "string" } & BaseFieldInput;
+type SliceFieldInput = { type: "slice" } & BaseFieldInput;
+type AddressFieldInput = { type: "address" } & BaseFieldInput;
+type BoolFieldInput = { type: "bool" } & BaseFieldInput;
+type UnknownFieldInput = { type: "unknown", expected: string } & BaseFieldInput;
+
+type InputItem = AnyFieldInput
+  | EmptyFieldInput
+  | TextFieldInput
+  | CoinsFieldInput
+  | UintFieldInput
+  | StringFieldInput
+  | SliceFieldInput
+  | AddressFieldInput
+  | BoolFieldInput
+  | UnknownFieldInput;
+
 export default {
+  components: { StringField, CoinsField, UintField, SliceField, AddressField, BooleanField, UnknownField },
   props: {
     types: {
       type: Object as () => ABIType[],
@@ -55,7 +93,8 @@ export default {
   data() {
     return {
       abi: {} as { type: "receiver", receiver: ABIReceiver } | { type: "getter", getter: ABIGetter },
-      getterResult: [] as { type: string, value: string }[]
+      getterResult: [] as { type: string, value: string }[],
+      refItems: [] as BaseFieldElement[],
     }
   },
   computed: {
@@ -70,54 +109,147 @@ export default {
 
       return null
     },
-    inputs() {
+    inputs(): InputItem[] {
+      this.refItems = new Array();
       const result = [] as InputItem[];
 
       if (this.abi.type == "getter" && this.abi.getter.arguments) {
         for (const argument of this.abi.getter.arguments) {
           switch (argument.type.kind) {
             case "dict":
+              result.push({
+                type: "unknown",
+                expected: "dict",
+                optional: false,
+                label: argument.name,
+              });
               // TODO
               break;
             case "simple":
               result.push({
+                type: "unknown",
+                expected: "simple",
+                optional: false,
                 label: argument.name,
-                type: argument.type.type,
-                format: argument.type.format,
-                bind: {
-                  type: "text",
-                  placeholder: argument.type.type
-                },
-                model: ""
               });
+              // TODO
               break;
           }
         }
       }
 
-      if (this.abi.type == "receiver" && this.abi.receiver.message.kind == "typed") {
-        const typeName = this.abi.receiver.message.type;
-        const type = this.types.find((value) => value.name === typeName);
-        if (type) {
-          for (const field of type.fields) {
-            switch (field.type.kind) {
-              case "dict":
-                // TODO
-                break;
-              case "simple":
-                result.push({
-                  label: field.name,
-                  type: field.type.type,
-                  format: field.type.format,
-                  bind: {
-                    type: "text",
-                    placeholder: field.type.type
-                  },
-                  model: ""
-                });
-                break;
+      if (this.abi.type == "receiver") {
+        switch (this.abi.receiver.message.kind) {
+          case "any":
+            result.push({
+              type: "any",
+              optional: false,
+              label: "Any message" // TODO translate
+            })
+            // TODO support any
+            break;
+          case "empty":
+            result.push({
+              type: "empty",
+              optional: false,
+              label: "Empty message" // TODO translate
+            })
+            // TODO support empty
+            break;
+          case "text":
+            result.push({
+              type: "text",
+              optional: false,
+              label: "Text message" // TODO translate
+            })
+            // TODO support empty
+            break;
+          case "typed":
+            const typeName = this.abi.receiver.message.type;
+            const type = this.types.find((value) => value.name === typeName);
+            if (type) {
+              for (const field of type.fields) {
+                switch (field.type.kind) {
+                  case "dict":
+                    result.push({
+                      type: "unknown",
+                      expected: "dict",
+                      optional: false,
+                      label: field.name,
+                    });
+                    // TODO support dict
+                    break;
+                  case "simple":
+                    switch (field.type.type) {
+                      // TODO
+                      case "string":
+                        result.push({
+                          type: "string",
+                          optional: field.type.optional || false,
+                          label: field.name
+                        });
+                        break;
+                      case "uint":
+                        if (field.type.format == "coins") {
+                          result.push({
+                            type: "uint",
+                            format: "coins",
+                            optional: field.type.optional || false,
+                            label: field.name
+                          });
+                        }
+                        else if (typeof field.type.format == 'number') {
+                          result.push({
+                            type: "uint",
+                            format: field.type.format,
+                            optional: field.type.optional || false,
+                            label: field.name
+                          });
+                        }
+                        else {
+                          result.push({
+                            type: "unknown",
+                            expected: "uint with" + field.type.format,
+                            optional: false,
+                            label: field.name,
+                          });
+                        }
+                        break;
+                      case "slice":
+                        result.push({
+                          type: "slice",
+                          optional: false,
+                          label: field.name,
+                        })
+                        break;
+                      case "address":
+                        result.push({
+                          type: "address",
+                          optional: false,
+                          label: field.name,
+                        })
+                        break;
+                      case "bool":
+                        result.push({
+                          type: "bool",
+                          optional: true,
+                          label: field.name,
+                        })
+                        break;
+                      default:
+                        result.push({
+                          type: "unknown",
+                          expected: field.type.type,
+                          optional: false,
+                          label: field.name,
+                        });
+                        break;
+                    }
+                    // TODO
+                    break;
+                }
+              }
             }
-          }
         }
       }
 
@@ -140,19 +272,18 @@ export default {
         return;
       }
 
-      const args = [] as TupleItem[];
+      this.refItems = this.refItems.filter(item => !!item);
+      if (this.refItems.map((item) => item.validate()).filter(item => !item).length > 0) {
+        return false;
+      }
 
-      for (const input of this.inputs) {
-        switch (input.type) {
-          case "address":
-            args.push({
-              type: "slice",
-              cell: beginCell().storeAddress(Address.parse(input.model)).asCell()
-            });
-            break;
-          default:
-            console.log("UNKNOWN TYPE", input.type); // TODO
-        }
+      const args = [] as TupleItem[];
+      for (const input of this.refItems) {
+        args.push({
+          type: "cell",
+          cell: beginCell().store(input.store).endCell()
+        })
+        // TODO
       }
 
       const provider = await this.provider.get(this.abi.getter.name, args);
@@ -190,6 +321,11 @@ export default {
         return;
       }
 
+      this.refItems = this.refItems.filter(item => !!item);
+      if (this.refItems.map((item) => item.validate()).filter(item => !item).length > 0) {
+        return false;
+      }
+
       const typeName = this.abi.receiver.message.type;
       const type = this.types.find((value) => value.name === typeName);
       if (!type) {
@@ -202,17 +338,8 @@ export default {
         tx.storeUint(type.header, 32);
       }
 
-      for (const input of this.inputs) {
-        switch (input.type) {
-          case "uint":
-            tx.storeUint(parseInt(input.model), input.format as number);
-            break;
-          case "address":
-            tx.storeRef(beginCell().storeAddress(Address.parse(input.model)).asCell());
-            break;
-          default:
-            console.log("UNKNOWN TYPE", input.type); // TODO
-        }
+      for (const input of this.refItems) {
+        tx.store(input.store);
       }
 
       await this.$tonConnectUI.sendTransaction(

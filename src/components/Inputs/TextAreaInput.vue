@@ -1,5 +1,5 @@
 <template>
-  <BaseLabel :required="required" :label="label" :placeholder="placeholder" :help-text="helpText"
+  <BaseLabel :optional="optional" :label="label" :placeholder="placeholder" :help-text="helpText"
     :error-text="errorText">
     <textarea @input="validate" v-bind:class="{ 'is-danger': errorText }" v-model="value" class="textarea" type="text"
       :placeholder="placeholder"></textarea>

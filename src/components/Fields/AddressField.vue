@@ -3,33 +3,21 @@
 </template>
 
 <script lang="ts">
+import { Builder, Address } from 'ton-core';
 import TextInput from '../Inputs/TextInput.vue';
+import BaseField from './BaseField.vue';
 
 export default {
+  extends: BaseField,
   components: {
     TextInput
-  },
-  props: {
-    optional: {
-      type: Boolean,
-    },
-    label: {
-      type: String,
-      required: true,
-    },
-    placeholder: {
-      type: String,
-    },
-    helpText: {
-      type: String,
-    },
   },
   methods: {
     validate(): boolean {
       return (this.$refs.input as typeof TextInput).validate();
     },
-    store(): void {
-
+    store(builder: Builder): void {
+      builder.storeAddress(Address.parse((this.$refs.input as typeof TextInput).value))
     }
   }
 }

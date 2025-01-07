@@ -1,7 +1,7 @@
 <template extends>
   <BaseLabel :optional="optional" :label="label" :placeholder="placeholder" :help-text="helpText"
     :error-text="errorText">
-    <input v-bind:class="{ 'is-danger': errorText }" @change="validate" v-model="value" class="input" type="number"
+    <input v-bind:class="{ 'is-danger': errorText }" @change="validate" v-model="value" class="checkbox" type="checkbox"
       :placeholder="placeholder">
   </BaseLabel>
 </template>

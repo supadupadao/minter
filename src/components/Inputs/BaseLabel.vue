@@ -1,6 +1,6 @@
 <template>
   <div class="field">
-    <label class="label">{{ label }}<span v-if="required" class="has-text-danger">*</span></label>
+    <label class="label">{{ label }}<span v-if="!optional" class="has-text-danger">*</span></label>
     <div class="control">
       <slot>...</slot>
     </div>
@@ -12,7 +12,7 @@
 <script lang="ts">
 export default {
   props: {
-    required: {
+    optional: {
       type: Boolean,
     },
     label: {

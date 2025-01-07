@@ -79,7 +79,8 @@
       "Warning": "Warning!",
       "requiredField": "required field",
       "RequiredField": "This field is required",
-      "NaN": "Not a number"
+      "NaN": "Not a number",
+      "InvalidSlice": "Invalid slice format"
     }
   }
 }

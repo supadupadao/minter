@@ -2,19 +2,20 @@
   <form>
     <StringField ref="jettonName" :label="$t('message.NewJettonForm.JettonName_Label')"
       :help-text="$t('message.NewJettonForm.JettonName_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonName_Placeholder')" :required="true" />
+      :placeholder="$t('message.NewJettonForm.JettonName_Placeholder')" :optional="false" />
 
     <StringField ref="jettonSymbol" :label="$t('message.NewJettonForm.JettonSymbol_Label')"
       :help-text="$t('message.NewJettonForm.JettonSymbol_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonSymbol_Placeholder')" :required="true" />
+      :placeholder="$t('message.NewJettonForm.JettonSymbol_Placeholder')" :optional="false" />
 
     <StringField ref="jettonDescription" :label="$t('message.NewJettonForm.JettonDescription_Label')"
       :help-text="$t('message.NewJettonForm.JettonDescription_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonDescription_Placeholder')" :required="true" input-type="textarea" />
+      :placeholder="$t('message.NewJettonForm.JettonDescription_Placeholder')" :optional="false"
+      input-type="textarea" />
 
     <CoinsField ref="maxSupply" :label="$t('message.NewJettonForm.JettonMaxSupply_Label')"
       :help-text="$t('message.NewJettonForm.JettonMaxSupply_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonMaxSupply_Placeholder')" :required="true" />
+      :placeholder="$t('message.NewJettonForm.JettonMaxSupply_Placeholder')" :optional="false" />
 
     <div class="control">
       <button class="button is-link" @click="deployToken">{{ $t("message.NewJettonForm.DeployJetton") }}</button>
