@@ -1,5 +1,7 @@
 <template>
-  <NumberInput ref="input" :optional="optional" :label="label" :placeholder="placeholder" :help-text="helpText" />
+  <NumberInput ref="input" :optional="optional" :label="label"
+    :placeholder="placeholder || $t('message.Fields.Uint_Placeholder', { min, max, format })"
+    :help-text="helpText || $t('message.Fields.Uint_HelpText', { min, max, format })" />
 </template>
 
 <script lang="ts">
@@ -13,6 +15,12 @@ export default {
     format: {
       type: Number,
       required: true,
+    }
+  },
+  data() {
+    return {
+      min: 0,
+      max: 2 ** this.format - 1
     }
   },
   components: {

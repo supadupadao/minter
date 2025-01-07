@@ -1,5 +1,7 @@
 <template>
-  <NumberInput ref="input" :optional="optional" :label="label" :placeholder="placeholder" :help-text="helpText" />
+  <NumberInput ref="input" :optional="optional" :label="label"
+    :placeholder="placeholder || $t('message.Fields.Coins_Placeholder')"
+    :help-text="helpText || $t('message.Fields.Coins_HelpText')" />
 </template>
 
 <script lang="ts">

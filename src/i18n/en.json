@@ -81,6 +81,18 @@
       "RequiredField": "This field is required",
       "NaN": "Not a number",
       "InvalidSlice": "Invalid slice format"
+    },
+    "Fields": {
+      "Address_Placeholder": "e.g. 0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT",
+      "Address_HelpText": "TON address in any format",
+      "Coins_Placeholder": "e.g. 1337",
+      "Coins_HelpText": "Coins amount",
+      "Uint_Placeholder": "Numbers from {min} to {max}",
+      "Uint_HelpText": "Unsigned {format}-bit integer field",
+      "Slice_Placeholder": "",
+      "Slice_HelpText": "Slice value in base64 format",
+      "String_Placeholder": "",
+      "String_HelpText": "String field"
     }
   }
 }
