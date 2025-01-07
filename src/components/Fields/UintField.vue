@@ -9,6 +9,12 @@ import BaseField from './BaseField.vue';
 
 export default {
   extends: BaseField,
+  props: {
+    format: {
+      type: Number,
+      required: true,
+    }
+  },
   components: {
     NumberInput
   },
@@ -17,7 +23,7 @@ export default {
       return (this.$refs.input as typeof NumberInput).validate()
     },
     store(builder: Builder): void {
-      builder.storeCoins(parseInt((this.$refs.input as typeof NumberInput).value))
+      builder.storeUint(parseInt((this.$refs.input as typeof NumberInput).value), this.format)
     }
   }
 }

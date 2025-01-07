@@ -1,7 +1,7 @@
 <template>
-  <TextInput ref="input" v-if="inputType == 'text'" :required="required" :label="label" :placeholder="placeholder"
+  <TextInput ref="input" v-if="inputType == 'text'" :optional="optional" :label="label" :placeholder="placeholder"
     :help-text="helpText" />
-  <TextAreaInput ref="input" v-if="inputType == 'textarea'" :required="required" :label="label"
+  <TextAreaInput ref="input" v-if="inputType == 'textarea'" :optional="optional" :label="label"
     :placeholder="placeholder" :help-text="helpText" />
 </template>
 

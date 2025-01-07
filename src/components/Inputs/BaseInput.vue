@@ -1,5 +1,5 @@
 <template>
-  <BaseLabel :required="required" :label="label" :placeholder="placeholder" :help-text="helpText"
+  <BaseLabel :optional="optional" :label="label" :placeholder="placeholder" :help-text="helpText"
     :error-text="errorText">
     <input v-bind:class="{ 'is-danger': errorText }" v-model="value" @input="validate" class="input" type="text"
       :placeholder="placeholder">
@@ -14,7 +14,7 @@ export default {
     BaseLabel
   },
   props: {
-    required: {
+    optional: {
       type: Boolean,
     },
     label: {
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     defaultValidation() {
-      if (this.required && !this.value) {
+      if (!this.optional && !this.value) {
         this.errorText = this.$t("message.Common.RequiredField");
         return false
       }
