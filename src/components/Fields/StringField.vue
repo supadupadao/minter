@@ -1,8 +1,10 @@
 <template>
-  <TextInput ref="input" v-if="inputType == 'text'" :optional="optional" :label="label" :placeholder="placeholder"
-    :help-text="helpText" />
+  <TextInput ref="input" v-if="inputType == 'text'" :optional="optional" :label="label"
+    :placeholder="placeholder || $t('message.Fields.String_Placeholder')"
+    :help-text="helpText || $t('message.Fields.String_HelpText')" />
   <TextAreaInput ref="input" v-if="inputType == 'textarea'" :optional="optional" :label="label"
-    :placeholder="placeholder" :help-text="helpText" />
+    :placeholder="placeholder || $t('message.Fields.String_Placeholder')"
+    :help-text="helpText || $t('message.Fields.String_HelpText')" />
 </template>
 
 <script lang="ts">

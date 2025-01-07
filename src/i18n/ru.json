@@ -81,6 +81,18 @@
       "RequiredField": "Обязательное поле",
       "NaN": "Ожидалось число",
       "InvalidSlice": "Неправильный формат slice"
+    },
+    "Fields": {
+      "Address_Placeholder": "напр. 0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT",
+      "Address_HelpText": "TON адрес в любом формате",
+      "Coins_Placeholder": "напр. 1337",
+      "Coins_HelpText": "Количество монет",
+      "Uint_Placeholder": "Число от {min} до {max}",
+      "Uint_HelpText": "Целое {format}-битное число без знака",
+      "Slice_Placeholder": "",
+      "Slice_HelpText": "Slice в формате base64",
+      "String_Placeholder": "",
+      "String_HelpText": "Строка"
     }
   }
 }
