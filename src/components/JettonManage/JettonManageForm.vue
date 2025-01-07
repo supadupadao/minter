@@ -128,14 +128,71 @@ export default {
               // TODO
               break;
             case "simple":
-              result.push({
-                type: "unknown",
-                expected: "simple",
-                optional: false,
-                label: argument.name,
-              });
-              // TODO
-              break;
+              switch (argument.type.type) {
+                // TODO
+                case "string":
+                  result.push({
+                    type: "string",
+                    optional: argument.type.optional || false,
+                    label: argument.name
+                  });
+                  break;
+                case "uint":
+                  if (argument.type.format == "coins") {
+                    result.push({
+                      type: "uint",
+                      format: "coins",
+                      optional: argument.type.optional || false,
+                      label: argument.name
+                    });
+                  }
+                  else if (typeof argument.type.format == 'number') {
+                    result.push({
+                      type: "uint",
+                      format: argument.type.format,
+                      optional: argument.type.optional || false,
+                      label: argument.name
+                    });
+                  }
+                  else {
+                    result.push({
+                      type: "unknown",
+                      expected: "uint with" + argument.type.format,
+                      optional: false,
+                      label: argument.name,
+                    });
+                  }
+                  break;
+                case "slice":
+                  result.push({
+                    type: "slice",
+                    optional: false,
+                    label: argument.name,
+                  })
+                  break;
+                case "address":
+                  result.push({
+                    type: "address",
+                    optional: false,
+                    label: argument.name,
+                  })
+                  break;
+                case "bool":
+                  result.push({
+                    type: "bool",
+                    optional: true,
+                    label: argument.name,
+                  })
+                  break;
+                default:
+                  result.push({
+                    type: "unknown",
+                    expected: argument.type.type,
+                    optional: false,
+                    label: argument.name,
+                  });
+                  break;
+              }
           }
         }
       }
@@ -282,7 +339,7 @@ export default {
       const args = [] as TupleItem[];
       for (const input of this.refItems) {
         args.push({
-          type: "cell",
+          type: "slice",
           cell: beginCell().store(input.store).endCell()
         })
         // TODO
