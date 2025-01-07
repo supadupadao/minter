@@ -70,7 +70,8 @@
       "Getters": "Getters",
       "Legend": "Legend",
       "ChooseOperation": "Jetton management tool",
-      "DefaultText": "Choose operation which you want to execute to jetton contract"
+      "DefaultText": "Choose operation which you want to execute to jetton contract",
+      "NoSourceCode": "Source code of this contract has not published to TON Verifier. So this tool using default ABI."
     },
     "AboutPage": {
       "AboutText": "WORK IN PROGRESS"
