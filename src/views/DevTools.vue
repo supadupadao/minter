@@ -8,13 +8,13 @@
       <div v-if="!isCorrectInterface" class="cell is-col-span-4-desktop">
         <div class="box is-shadowless has-background-warning-light">
           <span class="tag is-warning">{{ $t('message.Common.Warning') }}</span>
-          {{ $t('message.JettonManage.DifferentContract') }}
+          {{ $t('message.DevTools.DifferentContract') }}
         </div>
       </div>
       <div v-if="!isSourceCodeProvided" class="cell is-col-span-4-desktop">
         <div class="box is-shadowless has-background-warning-light">
           <span class="tag is-warning">{{ $t('message.Common.Warning') }}</span>
-          {{ $t('message.JettonManage.NoSourceCode') }}
+          {{ $t('message.DevTools.NoSourceCode') }}
         </div>
       </div>
       <div v-if="jettonData && parsedMetadata" class="cell is-col-span-4-desktop">
@@ -26,16 +26,16 @@
       <div class="cell is-col-span-1-desktop">
         <div class="box is-shadowless has-background-light">
           <aside class="menu">
-            <p class="menu-label">{{ $t("message.JettonManage.Receivers") }}</p>
+            <p class="menu-label">{{ $t("message.DevTools.Receivers") }}</p>
             <ul class="menu-list">
               <li v-bind:key="index" v-for="(receiver, index) in abi.receivers">
-                <JettonOperationsItemReceiver :receiver="receiver" @click="$refs.manageForm?.setReceiver(receiver)" />
+                <ContractOperationsItemReceiver :receiver="receiver" @click="$refs.manageForm?.setReceiver(receiver)" />
               </li>
             </ul>
-            <p class="menu-label">{{ $t("message.JettonManage.Getters") }}</p>
+            <p class="menu-label">{{ $t("message.DevTools.Getters") }}</p>
             <ul class="menu-list">
               <li v-bind:key="index" v-for="(getter, index) in abi.getters">
-                <JettonOperationsItemGetter :getter="getter" @click="$refs.manageForm?.setGetter(getter)" />
+                <ContractOperationsItemGetter :getter="getter" @click="$refs.manageForm?.setGetter(getter)" />
               </li>
             </ul>
           </aside>
@@ -43,26 +43,26 @@
       </div>
       <div class="cell is-col-span-3-desktop">
         <div class="box is-shadowless has-background-light">
-          <JettonManageForm ref="manageForm" :types="(abi.types || [])" :provider="provider" />
+          <ContractManageForm ref="manageForm" :types="(abi.types || [])" :provider="provider" />
         </div>
       </div>
       <div class="cell is-col-span-1-desktop">
         <div class="box is-shadowless has-background-light">
-          <h3 class="subtitle">{{ $t("message.JettonManage.Legend") }}</h3>
+          <h3 class="subtitle">{{ $t("message.DevTools.Legend") }}</h3>
           <span class="icon has-text-danger is-medium">
             <i class="fa-solid fa-circle"></i>
           </span>
-          <span> - {{ $t("message.JettonManage.Internals") }}</span>
+          <span> - {{ $t("message.DevTools.Internals") }}</span>
           <br />
           <span class="icon has-text-warning is-medium">
             <i class="fa-solid fa-circle-half-stroke"></i>
           </span>
-          <span> - {{ $t("message.JettonManage.Externals") }}</span>
+          <span> - {{ $t("message.DevTools.Externals") }}</span>
           <br />
           <span class="icon has-text-success is-medium">
             <i class="fa-regular fa-circle"></i>
           </span>
-          <span> - {{ $t("message.JettonManage.Getters") }}</span>
+          <span> - {{ $t("message.DevTools.Getters") }}</span>
         </div>
       </div>
     </div>
@@ -70,16 +70,16 @@
 </template>
 
 <script lang="ts">
-import JettonCardBig from '@/components/JettonManage/JettonCardBig.vue';
-import JettonOperationsItemReceiver from '@/components/JettonManage/JettonOperationsItemReceiver.vue';
+import JettonCardBig from '@/components/DevTools/JettonCardBig.vue';
 import { parseMetadata } from '@/utils/dict';
 import { SupaDupaJettonMaster } from '@/utils/jettonMaster';
 import type { JettonMasterData, MetadataDict } from '@/utils/types';
 import type { ContractABI, ContractProvider, TonClient } from 'ton';
 import { Address, Cell } from 'ton-core';
 import jettonMasterABI from "@/assets/JettonMaster.abi.json";
-import JettonOperationsItemGetter from '@/components/JettonManage/JettonOperationsItemGetter.vue';
-import JettonManageForm from '@/components/JettonManage/JettonManageForm.vue';
+import ContractOperationsItemGetter from '@/components/DevTools/ContractOperationsItemGetter.vue';
+import ContractOperationsItemReceiver from '@/components/DevTools/ContractOperationsItemReceiver.vue';
+import ContractManageForm from '@/components/DevTools/ContractManageForm.vue';
 
 // const ORBS_SOURCES_REGISTRY = Address.parse("EQD-BJSVUJviud_Qv7Ymfd3qzXdrmV525e3YDzWQoHIAiInL");
 const ORBS_SOURCES_REGISTRY_TESTNET = Address.parse("EQCsdKYwUaXkgJkz2l0ol6qT_WxeRbE_wBCwnEybmR0u5TO8");
@@ -189,7 +189,7 @@ async function initJettonMetadata(tonClient: TonClient, address: Address) {
 
 export default {
   components: {
-    JettonCardBig, JettonOperationsItemReceiver, JettonOperationsItemGetter, JettonManageForm,
+    JettonCardBig, ContractOperationsItemGetter, ContractOperationsItemReceiver, ContractManageForm
   },
   data() {
     return {

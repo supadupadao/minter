@@ -1,4 +1,5 @@
-import ManageJetton from '@/views/ManageJetton.vue'
+import DeployJetton from '@/views/DeployJetton.vue'
+import DevTools from '@/views/DevTools.vue'
 import HomePage from '@/views/HomePage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -11,9 +12,14 @@ const router = createRouter({
       component: HomePage,
     },
     {
+      path: '/deploy/jetton',
+      name: 'DeployJetton',
+      component: DeployJetton,
+    },
+    {
       path: "/manage/:address",
       name: 'ManageJetton',
-      component: ManageJetton,
+      component: DevTools,
     },
     {
       path: '/about',

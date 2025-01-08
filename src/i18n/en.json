@@ -7,6 +7,7 @@
     },
     "Navbar": {
       "Home": "Home",
+      "DeployJetton": "Deploy jetton",
       "More": "More",
       "ConnectWallet": "Connect wallet",
       "Disconnect": "Disconnect"
@@ -16,6 +17,56 @@
       "ContractLicense": "Smart contracts code is licensed under {license}.",
       "LicenseText": "License text",
       "OurLinks": "Our links"
+    },
+    "HomeCards": {
+      "Information": {
+        "Title": "What is SupaDupaMinter?",
+        "Description": "This is set of tools for The Open Network blockchain."
+      },
+      "InteractContracts": {
+        "Title": "Interact with TON contracts",
+        "Description": "Application generates UI for contract ABI. Useful for testing contracts.",
+        "LinkText": "Check example of feature"
+      },
+      "DeployJetton": {
+        "Title": "Deploy TON Jetton",
+        "Description": "You can launch new jetton in The Open Network.",
+        "LinkText": "Start here"
+      },
+      "OpenSource": {
+        "Title": "Open Source",
+        "Description": "This website is Free and Open-Source and published in our Github repo",
+        "LinkText": "View source codes"
+      },
+      "WorkInProgress": {
+        "Title": "Work in progress!",
+        "Description": "Be careful! This application uses <b>Testnet</b> version of TON Blockchain. Because it's not 100% ready yet.",
+        "LinkText": "If you found bug or typo please open an issue in Github"
+      }
+    },
+    "NewJettonCards":{
+      "Information": {
+        "Title": "What is it?",
+        "Description": "Using this tool you can create your own token in The Open Network blockchain.<h3>How?</h3><ul><li>At first you need to connect your TON wallet.</li><li>Come up with name and description for your future token, fill in the fields in form and press \"Deploy\" button</li><li>You will need to pay a small network fee, after which your token will be created</li></ul>"
+      },
+      "Decentralized": {
+        "Title": "100% On-Chain",
+        "Description": "Jetton is designed to store <b>full</b> metadata in blockchain.<br />It means that your jetton is not depends from hostings status.<br />Metadata stores directly in TON storage. So your jetton will depend only from TON blockchain."
+      },
+      "Managable": {
+        "Title": "Easy manageable",
+        "Description": "It is good for DAO because this smart contract have flexible API for jetton management"
+      },
+      "OpenSource": {
+        "Title": "Open Source",
+        "Description": "Jetton source code is Free and Open-Source and published in our Github repos! If you want, you can contibute to it!",
+        "LinkText": "View source codes"
+      },
+      "WorkInProgress": {
+        "Title": "Work in progress!",
+        "Description": "Be careful! This application uses <b>Testnet</b> version of TON Blockchain. Because it's not 100% ready yet.",
+        "LinkText": "If you found bug or typo please open an issue in Github"
+      }
     },
     "NewJettonForm": {
       "JettonName_Label": "Jetton name",
@@ -30,37 +81,12 @@
       "JettonMaxSupply_Label": "Max supply",
       "JettonMaxSupply_Placeholder": "1337",
       "JettonMaxSupply_HelpText": "How many tokens will be allowed to mint",
-      "DeployJetton": "Deploy 🚀"
+      "DeployJetton": "Deploy 🚀",
+      "SearchFormTitle": "Manage your jetton"
     },
-    "NewJettonCards":{
-      "WorkInProgress": {
-        "Title": "Work in progress!",
-        "Description": "Be careful! This application uses <b>Testnet</b> version of TON Blockchain. Because it's not 100% ready yet.",
-        "LinkText": "If you found bug or typo please open an issue in Github"
-      },
-      "WhatIsIt": {
-        "Title": "What is it?",
-        "Description": "Using this tool you can create your own token in The Open Network blockchain.<h3>How?</h3><ul><li>At first you need to connect your TON wallet.</li><li>Come up with name and description for your future token, fill in the fields in form and press \"Deploy\" button</li><li>You will need to pay a small network fee, after which your token will be created</li></ul>"
-      },
-      "Decentralized": {
-        "Title": "100% On-Chain",
-        "Description": "Jetton is designed to store <b>full</b> metadata in blockchain.<br />It means that your jetton is not depends from hostings status.<br />Metadata stores directly in TON storage. So your jetton will depend only from TON blockchain."
-      },
-      "Managable": {
-        "Title": "Easy manageable",
-        "Description": "It is good for DAO because this smart contract have flexible API for jetton management"
-      },
-      "OpenSource": {
-        "Title": "Open Source",
-        "Description": "Both of jetton and website source codes are free and open and published in our Github repos! If you want, you can help to improve this application",
-        "LinkText": "View source codes"
-      }
-    },
-    "JettonSearch": {
-      "FindJetton": "Find jetton by address",
-      "SearchButton": "Search"
-    },
-    "JettonManage": {
+    "DevTools": {
+      "SearchButton": "Search",
+      "SearchText": "Open contract by address",
       "DifferentContract": "This jetton is not deployed via this website. So it may have different logic and this website may display its data incorrectly.",
       "AdminAddress": "Admin address",
       "TotalSupply": "Total supply",
@@ -80,8 +106,7 @@
       "Warning": "Warning!",
       "requiredField": "required field",
       "RequiredField": "This field is required",
-      "NaN": "Not a number",
-      "InvalidSlice": "Invalid slice format"
+      "NaN": "Not a number"
     },
     "Fields": {
       "Address_Placeholder": "e.g. 0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT",
