@@ -1,8 +1,8 @@
 <template>
-  <h2 class="subtitle">{{ title || $t("message.JettonManage.ChooseOperation") }}</h2>
+  <h2 class="subtitle">{{ title || $t("message.DevTools.ChooseOperation") }}</h2>
 
   <div v-if="!abi.type">
-    {{ $t("message.JettonManage.DefaultText") }}
+    {{ $t("message.DevTools.DefaultText") }}
   </div>
 
 
