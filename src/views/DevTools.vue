@@ -99,7 +99,7 @@ function bigIntFromBuffer(buffer: Buffer): bigint {
   return BigInt(`0x${buffer.toString("hex")}`);
 }
 
-async function getSources(codeCellHash: Buffer, tonClient: TonClient) {
+async function getSources(codeCell: Cell, tonClient: TonClient) {
   let abi = null
   // Source provider
   const contractState = await tonClient.getContractState(ORBS_SOURCES_REGISTRY_TESTNET); // TODO add error handling
@@ -117,7 +117,7 @@ async function getSources(codeCellHash: Buffer, tonClient: TonClient) {
     },
     {
       type: "int",
-      value: bigIntFromBuffer(codeCellHash)
+      value: bigIntFromBuffer(codeCell.hash())
     },
   ]);
 
@@ -136,10 +136,13 @@ async function getSources(codeCellHash: Buffer, tonClient: TonClient) {
 
   const verifiedContract = await (await fetch(ipfsLink.replace("ipfs://", ORBS_IPFS_ENDPOINT_TESTNET))).json() as SourceResult;
   for (const source of verifiedContract.sources) {
-    if (source.filename.endsWith(".abi")) {
+    if (source.filename.endsWith(".pkg")) {
       const url = source.url.replace("ipfs://", ORBS_IPFS_ENDPOINT_TESTNET);
       const content = await fetch(url).then((u) => u.json());
-      abi = content
+      const pkgCodeCell = Cell.fromBase64(content.code).toBoc().toString("base64");
+      if (pkgCodeCell == codeCell.toBoc().toString("base64")) {
+        abi = JSON.parse(content.abi);
+      }
     }
   }
 
@@ -183,7 +186,7 @@ async function initJettonMetadata(tonClient: TonClient, address: Address) {
     parsedMetadata,
     jettonData,
     provider,
-    abi: await getSources(code.hash(), tonClient)
+    abi: await getSources(code, tonClient)
   }
 }
 
