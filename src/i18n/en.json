@@ -87,7 +87,6 @@
     "DevTools": {
       "SearchButton": "Search",
       "SearchText": "Open contract by address",
-      "DifferentContract": "This jetton is not deployed via this website. So it may have different logic and this website may display its data incorrectly.",
       "AdminAddress": "Admin address",
       "TotalSupply": "Total supply",
       "Receivers": "Receivers",

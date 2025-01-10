@@ -1,7 +1,24 @@
 <template>
-  <TextInput ref="input" :optional="optional" :label="label"
-    :placeholder="placeholder || $t('message.Fields.Slice_Placeholder')"
-    :help-text="helpText || $t('message.Fields.Slice_HelpText')" />
+  <strong>Slice</strong>
+
+  <article class="message">
+    <div class="message-body">
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <div class="select is-fullwidth">
+            <select name="type">
+              <option value="string">string</option>
+              <option value="uint">uint</option>
+              <option value="coins">coins</option>
+            </select>
+          </div>
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary">Add field</button>
+        </div>
+      </div>
+    </div>
+  </article>
 </template>
 
 <script lang="ts">
