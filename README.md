@@ -10,6 +10,8 @@
 
 🌍 Last version of application automatically deploys at [minter.supadupa.space](https://minter.supadupa.space) by pushing to `master` branch
 
+📖 [Minter documentation](https://docs.supadupa.space/minter)
+
 # Features
 
 🆕 **Jetton deploy**:
