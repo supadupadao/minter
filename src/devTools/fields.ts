@@ -12,7 +12,9 @@ export type EmptyFieldInput = { type: "empty" };
 export type TextFieldInput = { type: "text" };
 export type CoinsFieldInput = { type: "uint", format: "coins" } & BaseFieldInput;
 export type UintFieldInput = { type: "uint", format: number } & BaseFieldInput;
+export type IntFieldInput = { type: "int", format: number } & BaseFieldInput;
 export type StringFieldInput = { type: "string" } & BaseFieldInput;
+export type CellFieldInput = { type: "cell" } & BaseFieldInput;
 export type SliceFieldInput = { type: "slice" } & BaseFieldInput;
 export type AddressFieldInput = { type: "address" } & BaseFieldInput;
 export type BoolFieldInput = { type: "bool" } & BaseFieldInput;
@@ -23,7 +25,9 @@ export type InputItem = AnyFieldInput
   | TextFieldInput
   | CoinsFieldInput
   | UintFieldInput
+  | IntFieldInput
   | StringFieldInput
+  | CellFieldInput
   | SliceFieldInput
   | AddressFieldInput
   | BoolFieldInput
@@ -186,12 +190,40 @@ export class FieldsManager {
   }
 
   /**
+   * Store `int` field
+   * @param type 
+   * @returns 
+   */
+  public storeInt(type: SimpleFieldParameters) {
+    if (typeof type.format == "number") {
+      this.fields.push({
+        type: "int",
+        format: type.format,
+        label: type.name,
+        optional: type.optional,
+      });
+    }
+  }
+
+  /**
    * Store `bool` field
    * @param type 
    */
   public storeBoolean(type: SimpleFieldParameters) {
     this.fields.push({
       type: "bool",
+      label: type.name,
+      optional: type.optional,
+    });
+  }
+
+  /**
+   * Store `cell` field
+   * @param type 
+   */
+  public storeCell(type: SimpleFieldParameters) {
+    this.fields.push({
+      type: "cell",
       label: type.name,
       optional: type.optional,
     });
@@ -237,11 +269,11 @@ export class FieldsManager {
       case "uint":
         return this.storeUint(type);
       case "int":
-        return this.storeUnknown(type.type); // TODO
+        return this.storeInt(type);
       case "bool":
         return this.storeBoolean(type);
       case "cell":
-        return this.storeUnknown(type.type); // TODO
+        return this.storeCell(type);
       case "slice":
         return this.storeSlice(type);
       default:
