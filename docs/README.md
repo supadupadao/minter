@@ -1,5 +1,7 @@
 # Minter Docs
 
+WORK IN PROGRESS!
+
 ## How ABI getting works?
 
 __Participants__:
