@@ -103,22 +103,41 @@
     },
     "Common": {
       "Warning": "Внимание!",
-      "requiredField": "обязательное поле",
-      "RequiredField": "Обязательное поле",
-      "NaN": "Ожидалось число",
-      "InvalidSlice": "Неправильный формат slice"
+      "requiredField": "обязательное поле"
     },
     "Fields": {
-      "Address_Placeholder": "напр. 0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT",
-      "Address_HelpText": "TON адрес в любом формате",
-      "Coins_Placeholder": "напр. 1337",
-      "Coins_HelpText": "Количество монет",
-      "Uint_Placeholder": "Число от {min} до {max}",
-      "Uint_HelpText": "Целое {format}-битное число без знака",
-      "Slice_Placeholder": "",
-      "Slice_HelpText": "Slice в формате base64",
-      "String_Placeholder": "",
-      "String_HelpText": "Строка"
+      "Errors": {
+        "RequiredField": "Обязательное поле",
+        "WrongAddress": "Некорректный формат адреса",
+        "InvalidNumber": "Должно быть числом",
+        "MustBeMoreThan": "Значение должно быть больше чем {min}",
+        "MustBeLessThan": "Значение должно быть меньше чем {max}",
+        "InvalidBase64": "Неправильное значение base64"
+      },
+      "Address": {
+        "Placeholder": "напр. 0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT",
+        "HelpText": "Адрес контракта в любом формате"
+      },
+      "Coins": {
+        "Placeholder": "напр. 1337",
+        "HelpText": "Количество токенов"
+      },
+      "Uint": {
+        "Placeholder": "Число от {min} до {max}",
+        "HelpText": "Целое {format}-битное число без знака"
+      },
+      "Boolean": {
+        "Placeholder": "",
+        "HelpText": ""
+      },
+      "Slice": {
+        "Placeholder": "base64",
+        "HelpText": "Slice в формате base64"
+      },
+      "String": {
+        "Placeholder": "напр. Привет Мир",
+        "HelpText": "Строковое поле"
+      }
     }
   }
 }

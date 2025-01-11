@@ -1,39 +1,40 @@
 <template>
-  <strong>Slice</strong>
-
-  <article class="message">
-    <div class="message-body">
-      <div class="field has-addons">
-        <div class="control is-expanded">
-          <div class="select is-fullwidth">
-            <select name="type">
-              <option value="string">string</option>
-              <option value="uint">uint</option>
-              <option value="coins">coins</option>
-            </select>
-          </div>
-        </div>
-        <div class="control">
-          <button type="submit" class="button is-primary">Add field</button>
-        </div>
-      </div>
-    </div>
-  </article>
+  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Slice.HelpText')" :error-text="errorText"
+    :optional="true">
+    <input class="input" type="text" :placeholder="placeholder ?? $t('message.Fields.Slice.Placeholder')"
+      v-model="value" @input="validate">
+  </FieldLabelWrapper>
 </template>
 
 <script lang="ts">
 import { Cell, Builder } from 'ton-core';
 import BaseField from './BaseField.vue';
-import TextInput from '../Inputs/TextInput.vue';
+import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
 export default {
   extends: BaseField,
   components: {
-    TextInput
+    FieldLabelWrapper
   },
   methods: {
+    validate() {
+      if (!this.optional && !this.value) {
+        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+        return false;
+      }
+
+      try {
+        Cell.fromBase64(this.value);
+      } catch {
+        this.errorText = this.$t("message.Fields.Errors.InvalidBase64");
+        return false
+      }
+
+      this.errorText = "";
+      return true;
+    },
     store(builder: Builder): void {
-      builder.storeSlice(Cell.fromBase64((this.$refs.input as typeof TextInput).value).asSlice())
+      builder.storeSlice(Cell.fromBase64(this.value).asSlice())
     }
   }
 }

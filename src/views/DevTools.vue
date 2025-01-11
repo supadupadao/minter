@@ -64,8 +64,7 @@
 </template>
 
 <script lang="ts">
-import JettonCardBig from '@/components/DevTools/JettonCardBig.vue';
-import { type ContractABI } from 'ton';
+import { type ContractABI, type ContractProvider } from 'ton';
 import ContractOperationsItemGetter from '@/components/DevTools/ContractOperationsItemGetter.vue';
 import ContractOperationsItemReceiver from '@/components/DevTools/ContractOperationsItemReceiver.vue';
 import ContractManageForm from '@/components/DevTools/ContractManageForm.vue';
@@ -75,13 +74,14 @@ import DefaultABI from "@/assets/JettonMaster.abi.json";
 
 export default {
   components: {
-    JettonCardBig, ContractOperationsItemGetter, ContractOperationsItemReceiver, ContractManageForm
+    ContractOperationsItemGetter, ContractOperationsItemReceiver, ContractManageForm
   },
   data() {
     return {
       abi: {} as ContractABI,
       loading: true,
-      warnings: [] as string[]
+      warnings: [] as string[],
+      provider: {} as ContractProvider,
     }
   },
   async created() {
@@ -96,7 +96,7 @@ export default {
       // TODO 404
       return;
     }
-    const provider = this.$tonClient.provider(address, stateInit);
+    this.provider = this.$tonClient.provider(address, stateInit);
 
     const sourceFetcher = new ContractSourcesFetcher({
       network: {

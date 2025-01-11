@@ -1,18 +1,17 @@
 <template>
-  <TextInput ref="input" :optional="optional" :label="label" :placeholder="placeholder" :help-text="helpText" />
+  <FieldLabelWrapper :label="label" :help-text="helpText" :error-text="errorText" :optional="optional">
+    <input class="input" type="text" :placeholder="placeholder" v-model="value">
+  </FieldLabelWrapper>
 </template>
 
 <script lang="ts">
-import TextInput from '../Inputs/TextInput.vue';
+import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
 export default {
   components: {
-    TextInput
+    FieldLabelWrapper
   },
   props: {
-    optional: {
-      type: Boolean,
-    },
     label: {
       type: String,
       required: true,
@@ -23,13 +22,28 @@ export default {
     helpText: {
       type: String,
     },
+    optional: {
+      type: Boolean,
+    },
+  },
+  data() {
+    return {
+      errorText: "",
+      value: "",
+    }
   },
   methods: {
     validate(): boolean {
-      return (this.$refs.input as typeof TextInput).validate();
+      if (!this.optional && !this.value) {
+        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+        return false;
+      }
+
+      this.errorText = "";
+      return true;
     },
     store(): void {
-
+      // TODO
     }
   }
 }

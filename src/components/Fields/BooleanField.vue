@@ -1,23 +1,32 @@
 <template>
-  <BooleanInput ref="input" :optional="optional" :label="label" :placeholder="placeholder" :help-text="helpText" />
+  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Boolean.HelpText')"
+    :error-text="errorText" :optional="true">
+    <input class="checkbox" type="checkbox" :placeholder="placeholder ?? $t('message.Fields.Boolean.Placeholder')"
+      v-model="checked">
+  </FieldLabelWrapper>
 </template>
 
 <script lang="ts">
 import { Builder } from 'ton-core';
 import BaseField from './BaseField.vue';
-import BooleanInput from '../Inputs/BooleanInput.vue';
+import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
 export default {
   extends: BaseField,
   components: {
-    BooleanInput
+    FieldLabelWrapper
+  },
+  data() {
+    return {
+      checked: false,
+    }
   },
   methods: {
     validate(): boolean {
-      return (this.$refs.input as typeof BooleanInput).validate();
+      return true;
     },
     store(builder: Builder): void {
-      builder.storeBit((this.$refs.input as typeof BooleanInput).value)
+      builder.storeBit(this.checked)
     }
   }
 }

@@ -1,23 +1,23 @@
 <template>
-  <TextInput ref="input" v-if="inputType == 'text'" :optional="optional" :label="label"
-    :placeholder="placeholder || $t('message.Fields.String_Placeholder')"
-    :help-text="helpText || $t('message.Fields.String_HelpText')" />
-  <TextAreaInput ref="input" v-if="inputType == 'textarea'" :optional="optional" :label="label"
-    :placeholder="placeholder || $t('message.Fields.String_Placeholder')"
-    :help-text="helpText || $t('message.Fields.String_HelpText')" />
+  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.String.HelpText')"
+    :error-text="errorText" :optional="true">
+    <input v-if="inputType == 'text'" class="input" type="text"
+      :placeholder="placeholder ?? $t('message.Fields.String.Placeholder')" v-model="value" @input="validate" />
+    <textarea v-else-if="inputType == 'textarea'" class="input"
+      :placeholder="placeholder ?? $t('message.Fields.String.Placeholder')" v-model="value"
+      @input="validate"></textarea>
+  </FieldLabelWrapper>
 </template>
 
 <script lang="ts">
 import { beginCell, type Builder } from 'ton-core';
-import BaseInput from '../Inputs/BaseInput.vue';
-import TextAreaInput from '../Inputs/TextAreaInput.vue';
-import TextInput from '../Inputs/TextInput.vue';
 import BaseField from './BaseField.vue';
+import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
 export default {
   extends: BaseField,
   components: {
-    TextInput, TextAreaInput
+    FieldLabelWrapper
   },
   props: {
     inputType: {
@@ -27,10 +27,16 @@ export default {
   },
   methods: {
     validate(): boolean {
-      return (this.$refs.input as typeof BaseInput).validate()
+      if (!this.optional && !this.value) {
+        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+        return false;
+      }
+
+      this.errorText = "";
+      return true;
     },
     store(builder: Builder): void {
-      builder.storeRef(beginCell().storeStringRefTail((this.$refs.input as typeof TextInput).value).asCell())
+      builder.storeRef(beginCell().storeStringRefTail(this.value).asCell())
     }
   }
 }

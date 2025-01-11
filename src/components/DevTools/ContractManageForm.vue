@@ -5,10 +5,9 @@
     {{ $t("message.DevTools.DefaultText") }}
   </div>
 
+  <FieldList ref="fieldList" :form-title="title ?? 'title'" :inputs="inputs" />
 
-  <FieldList :form-title="title ?? 'title'" :inputs="inputs" :register-element="registerElement" />
-
-  <button class="button is-primary" @click="execute">Execute</button>
+  <button class="button is-primary" @click="devTools.execute($refs.fieldList?.getElements() ?? [])">Execute</button>
 
   <div v-if="getterResult" class="content">
     <ul>
@@ -21,7 +20,9 @@
 <script lang="ts">
 import { toNano, type ABIGetter, type ABIReceiver, type ABIType, type ContractProvider } from 'ton-core';
 import FieldList from '../Fields/FieldList.vue';
-import { BaseDevTools, GetterDevTools, ReceiverDevTools, type BaseFieldElement } from '@/utils/devTools';
+import { BaseDevTools } from '@/devTools/base';
+import { GetterDevTools } from '@/devTools/getter';
+import { ReceiverDevTools } from '@/devTools/receiver';
 
 export default {
   components: { FieldList },
@@ -53,7 +54,6 @@ export default {
     setGetter(getter: ABIGetter) {
       this.devTools = new GetterDevTools({
         getter,
-        types: this.types,
         provider: this.provider,
       });
     },
@@ -65,12 +65,6 @@ export default {
         tonConnectUI: this.$tonConnectUI,
         tonAmount: toNano("0.1")
       });
-    },
-    registerElement(el: BaseFieldElement) {
-      this.devTools.registerInput(el);
-    },
-    async execute() {
-      this.devTools.execute()
     },
   }
 }

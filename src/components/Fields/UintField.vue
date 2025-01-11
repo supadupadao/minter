@@ -1,13 +1,16 @@
 <template>
-  <NumberInput ref="input" :optional="optional" :label="label"
-    :placeholder="placeholder || $t('message.Fields.Uint_Placeholder', { min, max, format })"
-    :help-text="helpText || $t('message.Fields.Uint_HelpText', { min, max, format })" />
+  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Uint.HelpText', { min, max, format })"
+    :error-text="errorText" :optional="true">
+    <input class="input" type="number"
+      :placeholder="placeholder ?? $t('message.Fields.Uint.Placeholder', { min, max, format })" v-model="value"
+      @input="validate">
+  </FieldLabelWrapper>
 </template>
 
 <script lang="ts">
 import type { Builder } from 'ton-core';
-import NumberInput from '../Inputs/NumberInput.vue';
 import BaseField from './BaseField.vue';
+import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
 export default {
   extends: BaseField,
@@ -24,14 +27,37 @@ export default {
     }
   },
   components: {
-    NumberInput
+    FieldLabelWrapper
   },
   methods: {
     validate(): boolean {
-      return (this.$refs.input as typeof NumberInput).validate()
+      if (!this.optional && !this.value) {
+        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+        return false;
+      }
+
+      try {
+        parseInt(this.value);
+      } catch {
+        this.errorText = this.$t("message.Fields.Errors.InvalidNumber");
+        return false;
+      }
+
+      const value = parseInt(this.value);
+      if (value < this.min) {
+        this.errorText = this.$t("message.Fields.Errors.MustBeMoreThan", { min: this.min });
+        return false;
+      }
+      if (value > this.max) {
+        this.errorText = this.$t("message.Fields.Errors.MustBeLessThan", { max: this.max });
+        return false;
+      }
+
+      this.errorText = "";
+      return true;
     },
     store(builder: Builder): void {
-      builder.storeUint(parseInt((this.$refs.input as typeof NumberInput).value), this.format)
+      builder.storeUint(parseInt(this.value), this.format);
     }
   }
 }

@@ -1,6 +1,9 @@
 <template>
-  <strong>{{ label }}</strong><br />
-  <strong>{{ expected }}</strong> field type is not implemented yet.
+  <FieldLabelWrapper :label="label" :placeholder="placeholder" :help-text="helpText" :error-text="errorText"
+    :optional="true">
+    <strong>{{ label }}</strong><br />
+    <strong>{{ expected }}</strong> field type is not implemented yet.
+  </FieldLabelWrapper>
 </template>
 
 <script lang="ts">
