@@ -87,7 +87,6 @@
     "DevTools": {
       "SearchButton": "Search",
       "SearchText": "Open contract by address",
-      "DifferentContract": "This jetton is not deployed via this website. So it may have different logic and this website may display its data incorrectly.",
       "AdminAddress": "Admin address",
       "TotalSupply": "Total supply",
       "Receivers": "Receivers",
@@ -104,21 +103,41 @@
     },
     "Common": {
       "Warning": "Warning!",
-      "requiredField": "required field",
-      "RequiredField": "This field is required",
-      "NaN": "Not a number"
+      "requiredField": "required field"
     },
     "Fields": {
-      "Address_Placeholder": "e.g. 0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT",
-      "Address_HelpText": "TON address in any format",
-      "Coins_Placeholder": "e.g. 1337",
-      "Coins_HelpText": "Coins amount",
-      "Uint_Placeholder": "Numbers from {min} to {max}",
-      "Uint_HelpText": "Unsigned {format}-bit integer field",
-      "Slice_Placeholder": "",
-      "Slice_HelpText": "Slice value in base64 format",
-      "String_Placeholder": "",
-      "String_HelpText": "String field"
+      "Errors": {
+        "RequiredField": "This field is required",
+        "WrongAddress": "Cannot parse address",
+        "InvalidNumber": "Value must be number",
+        "MustBeMoreThan": "Value must be more than {min}",
+        "MustBeLessThan": "Value must be less than {max}",
+        "InvalidBase64": "Invalid base64"
+      },
+      "Address": {
+        "Placeholder": "e.g. 0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT",
+        "HelpText": "TON address in any format"
+      },
+      "Coins": {
+        "Placeholder": "e.g. 1337",
+        "HelpText": "Coins amount"
+      },
+      "Uint": {
+        "Placeholder": "Numbers from {min} to {max}",
+        "HelpText": "Unsigned {format}-bit integer field"
+      },
+      "Boolean": {
+        "Placeholder": "",
+        "HelpText": ""
+      },
+      "Slice": {
+        "Placeholder": "base64",
+        "HelpText": "Slice value in base64 format"
+      },
+      "String": {
+        "Placeholder": "e.g. Hello World",
+        "HelpText": "String field"
+      }
     }
   }
 }

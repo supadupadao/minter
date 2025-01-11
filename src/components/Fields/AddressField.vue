@@ -1,25 +1,40 @@
 <template>
-  <TextInput ref="input" :optional="optional" :label="label"
-    :placeholder="placeholder || $t('message.Fields.Address_Placeholder')"
-    :help-text="helpText || $t('message.Fields.Address_HelpText')" />
+  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Address.HelpText')"
+    :error-text="errorText" :optional="optional">
+    <input class="input" type="text" :placeholder="placeholder ?? $t('message.Fields.Address.Placeholder')"
+      v-model="value" @input="validate">
+  </FieldLabelWrapper>
 </template>
 
 <script lang="ts">
 import { Builder, Address } from 'ton-core';
-import TextInput from '../Inputs/TextInput.vue';
 import BaseField from './BaseField.vue';
+import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
 export default {
   extends: BaseField,
   components: {
-    TextInput
+    FieldLabelWrapper
   },
   methods: {
     validate(): boolean {
-      return (this.$refs.input as typeof TextInput).validate();
+      if (!this.optional && !this.value) {
+        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+        return false;
+      }
+
+      try {
+        Address.parse(this.value);
+      } catch {
+        this.errorText = this.$t("message.Fields.Errors.WrongAddress");
+        return false
+      }
+
+      this.errorText = "";
+      return true;
     },
     store(builder: Builder): void {
-      builder.storeAddress(Address.parse((this.$refs.input as typeof TextInput).value))
+      builder.storeAddress(Address.parse(this.value))
     }
   }
 }
