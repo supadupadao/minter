@@ -126,9 +126,17 @@
         "Placeholder": "Numbers from {min} to {max}",
         "HelpText": "Unsigned {format}-bit integer field"
       },
+      "Int": {
+        "Placeholder": "Numbers from {min} to {max}",
+        "HelpText": "Signed {format}-bit integer field"
+      },
       "Boolean": {
         "Placeholder": "",
         "HelpText": ""
+      },
+      "Cell": {
+        "Placeholder": "base64",
+        "HelpText": "Cell value in base64 format"
       },
       "Slice": {
         "Placeholder": "base64",

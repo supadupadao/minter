@@ -126,9 +126,17 @@
         "Placeholder": "Число от {min} до {max}",
         "HelpText": "Целое {format}-битное число без знака"
       },
+      "Int": {
+        "Placeholder": "Число от {min} до {max}",
+        "HelpText": "Целое {format}-битное число со знаком"
+      },
       "Boolean": {
         "Placeholder": "",
         "HelpText": ""
+      },
+      "Cell": {
+        "Placeholder": "base64",
+        "HelpText": "Ячейка в формате base64"
       },
       "Slice": {
         "Placeholder": "base64",
