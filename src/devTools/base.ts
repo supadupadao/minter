@@ -7,9 +7,11 @@ import { FieldsManager, type InputItem } from "./fields";
 export class BaseDevTools {
   protected fields: FieldsManager;
   protected title?: string;
+  public result: {key: string, value: string}[];
 
   constructor() {
     this.fields = new FieldsManager();
+    this.result = []
   }
 
   /**
@@ -27,7 +29,8 @@ export class BaseDevTools {
   public async execute(elements: BaseFieldElement[]): Promise<boolean> {
     let success = true;
     for (const el of elements) {
-      success = success && el.validate();
+      const result = el.validate();
+      success = success && result;
     }
     return success;
   }

@@ -7,11 +7,12 @@
 
   <FieldList ref="fieldList" :form-title="title ?? 'title'" :inputs="inputs" />
 
-  <button class="button is-primary" @click="devTools.execute($refs.fieldList?.getElements() ?? [])">Execute</button>
+  <button v-if="title" class="button is-primary"
+    @click="devTools.execute($refs.fieldList?.getElements() ?? [])">Execute</button>
 
-  <div v-if="getterResult" class="content">
+  <div v-if="devTools.result" class="content">
     <ul>
-      <li v-for="(item, index) in getterResult" v-bind:key="index"><b>{{ item.type }}</b>: {{ item.value }}</li>
+      <li v-for="(item, index) in devTools.result" v-bind:key="index"><b>{{ item.key }}</b>: {{ item.value }}</li>
     </ul>
   </div>
 
