@@ -19,6 +19,7 @@ It useful in following cases:
 Read more about this feature:
 
 - [User guide](DevTools/UserGuide.md)
+- [Developer guide](DevTools/DeveloperGuide.md)
 
 ### Jetton deploy
 
