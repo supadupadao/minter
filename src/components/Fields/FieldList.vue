@@ -6,7 +6,7 @@
       :ref="(el) => registerElement(index, el as BaseFieldElement)"
     />
     <CoinsField
-      v-else-if="input.type == 'uint' && input.format == 'coins'"
+      v-else-if="input.type == 'coins'"
       v-bind="input"
       :ref="(el) => registerElement(index, el as BaseFieldElement)"
     />
