@@ -1,6 +1,11 @@
 <template>
-  <FieldLabelWrapper :label="label" :help-text="helpText" :error-text="errorText" :optional="optional">
-    <input class="input" type="text" :placeholder="placeholder" v-model="value">
+  <FieldLabelWrapper
+    :label="label"
+    :help-text="helpText"
+    :error-text="errorText"
+    :optional="optional"
+  >
+    <input class="input" type="text" :placeholder="placeholder" v-model="value" />
   </FieldLabelWrapper>
 </template>
 
@@ -9,7 +14,7 @@ import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
 export default {
   components: {
-    FieldLabelWrapper
+    FieldLabelWrapper,
   },
   props: {
     label: {
@@ -28,23 +33,23 @@ export default {
   },
   data() {
     return {
-      errorText: "",
-      value: "",
-    }
+      errorText: '',
+      value: '',
+    };
   },
   methods: {
     validate(): boolean {
       if (!this.optional && !this.value) {
-        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+        this.errorText = this.$t('message.Fields.Errors.RequiredField');
         return false;
       }
 
-      this.errorText = "";
+      this.errorText = '';
       return true;
     },
     store(): void {
       // TODO
-    }
-  }
-}
+    },
+  },
+};
 </script>

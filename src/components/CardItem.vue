@@ -14,6 +14,6 @@ export default {
     description: String,
     linkText: String,
     linkUrl: String,
-  }
-}
+  },
+};
 </script>

@@ -8,8 +8,10 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>{{ jettonName }}</strong><br />
-          <small>{{ jettonMaxSupply }} {{ jettonSymbol }}</small><br />
+          <strong>{{ jettonName }}</strong
+          ><br />
+          <small>{{ jettonMaxSupply }} {{ jettonSymbol }}</small
+          ><br />
           <small>{{ jettonDescription }}</small>
         </p>
       </div>
@@ -24,6 +26,6 @@ export default {
     jettonDescription: String,
     jettonSymbol: String,
     jettonMaxSupply: Number,
-  }
-}
+  },
+};
 </script>

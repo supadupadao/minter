@@ -10,7 +10,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --config ./.prettierrc.json --write src/",
+    "format-check": "prettier --config ./.prettierrc.json --check src/"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",

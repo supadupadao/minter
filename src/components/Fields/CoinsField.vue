@@ -1,8 +1,17 @@
 <template>
-  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Coins.HelpText')" :error-text="errorText"
-    :optional="optional">
-    <input class="input" type="number" :placeholder="placeholder ?? $t('message.Fields.Coins.Placeholder')"
-      v-model="value" @input="validate">
+  <FieldLabelWrapper
+    :label="label"
+    :help-text="helpText ?? $t('message.Fields.Coins.HelpText')"
+    :error-text="errorText"
+    :optional="optional"
+  >
+    <input
+      class="input"
+      type="number"
+      :placeholder="placeholder ?? $t('message.Fields.Coins.Placeholder')"
+      v-model="value"
+      @input="validate"
+    />
   </FieldLabelWrapper>
 </template>
 
@@ -17,33 +26,33 @@ import FieldLabelWrapper from './FieldLabelWrapper.vue';
 export default {
   extends: BaseField,
   components: {
-    FieldLabelWrapper
+    FieldLabelWrapper,
   },
   methods: {
     validate(): boolean {
-      if (!this.optional && (!this.value && typeof this.value !== "number")) {
-        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+      if (!this.optional && !this.value && typeof this.value !== 'number') {
+        this.errorText = this.$t('message.Fields.Errors.RequiredField');
         return false;
       }
 
       try {
         parseInt(this.value);
       } catch {
-        this.errorText = this.$t("message.Fields.Errors.InvalidNumber");
+        this.errorText = this.$t('message.Fields.Errors.InvalidNumber');
         return false;
       }
 
       const value = parseInt(this.value);
       if (value < COINS_MIN_VALUE) {
-        this.errorText = this.$t("message.Fields.Errors.MustBeMoreThan", { min: COINS_MIN_VALUE });
+        this.errorText = this.$t('message.Fields.Errors.MustBeMoreThan', { min: COINS_MIN_VALUE });
         return false;
       }
       if (value > COINS_MAX_VALUE) {
-        this.errorText = this.$t("message.Fields.Errors.MustBeLessThan", { max: COINS_MAX_VALUE });
+        this.errorText = this.$t('message.Fields.Errors.MustBeLessThan', { max: COINS_MAX_VALUE });
         return false;
       }
 
-      this.errorText = "";
+      this.errorText = '';
       return true;
     },
     store(builder: Builder): void {
@@ -52,7 +61,7 @@ export default {
       } else {
         builder.storeCoins(parseInt(this.value));
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

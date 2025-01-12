@@ -2,8 +2,12 @@
   <form>
     <div class="field has-addons">
       <div class="control is-expanded">
-        <input v-model="address" class="input is-medium" type="text"
-          placeholder="0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT">
+        <input
+          v-model="address"
+          class="input is-medium"
+          type="text"
+          placeholder="0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACkT"
+        />
       </div>
       <div class="control">
         <button class="button is-info is-medium" @click="$router.push('/manage/' + address)">
@@ -18,8 +22,8 @@
 export default {
   setup() {
     return {
-      address: "",
-    }
-  }
-}
+      address: '',
+    };
+  },
+};
 </script>

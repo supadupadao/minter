@@ -25,17 +25,15 @@ export default {
     return {
       isConnected: reactive({
         value: false,
-        address: "",
-      })
-    }
+        address: '',
+      }),
+    };
   },
   beforeMount() {
-    this.$tonConnectUI.onStatusChange(
-      walletAndwalletInfo => {
-        this.isConnected.value = true;
-        this.isConnected.address = walletAndwalletInfo?.account.address.substring(0, 10) + "...";
-      }
-    );
+    this.$tonConnectUI.onStatusChange((walletAndwalletInfo) => {
+      this.isConnected.value = true;
+      this.isConnected.address = walletAndwalletInfo?.account.address.substring(0, 10) + '...';
+    });
   },
   methods: {
     openModal() {
@@ -44,7 +42,7 @@ export default {
     disconnect() {
       this.$tonConnectUI.disconnect();
       this.isConnected.value = false;
-    }
-  }
-}
+    },
+  },
+};
 </script>

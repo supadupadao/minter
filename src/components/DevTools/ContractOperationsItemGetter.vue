@@ -17,6 +17,6 @@ export default {
       type: Object as () => ABIGetter,
       required: true,
     },
-  }
-}
+  },
+};
 </script>

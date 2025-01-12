@@ -23,6 +23,6 @@ export default {
       type: Object as () => ABIReceiver,
       required: true,
     },
-  }
-}
+  },
+};
 </script>

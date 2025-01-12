@@ -1,7 +1,13 @@
 <template>
-  <FieldLabelWrapper :label="label" :placeholder="placeholder" :help-text="helpText" :error-text="errorText"
-    :optional="true">
-    <strong>{{ label }}</strong><br />
+  <FieldLabelWrapper
+    :label="label"
+    :placeholder="placeholder"
+    :help-text="helpText"
+    :error-text="errorText"
+    :optional="true"
+  >
+    <strong>{{ label }}</strong
+    ><br />
     <strong>{{ expected }}</strong> field type is not implemented yet.
   </FieldLabelWrapper>
 </template>
@@ -14,12 +20,12 @@ export default {
   props: {
     expected: {
       type: String,
-    }
+    },
   },
   methods: {
     validate() {
       return false;
-    }
-  }
-}
+    },
+  },
+};
 </script>

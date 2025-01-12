@@ -1,6 +1,6 @@
-import type { TonClient } from "ton";
-import { Address, Cell } from "ton-core";
-import { retry } from "./retry";
+import type { TonClient } from 'ton';
+import { Address, Cell } from 'ton-core';
+import { retry } from './retry';
 
 /**
  * Convert Buffer to BigInt
@@ -8,7 +8,7 @@ import { retry } from "./retry";
  * @returns bigint
  */
 export function bigIntFromBuffer(buffer: Buffer): bigint {
-  return BigInt(`0x${buffer.toString("hex")}`);
+  return BigInt(`0x${buffer.toString('hex')}`);
 }
 
 /**
@@ -18,9 +18,9 @@ export function bigIntFromBuffer(buffer: Buffer): bigint {
  */
 export function parseAddress(address: string): Address | null {
   try {
-    return Address.parse(address)
+    return Address.parse(address);
   } catch {
-    return null
+    return null;
   }
 }
 
@@ -30,16 +30,19 @@ export function parseAddress(address: string): Address | null {
  * @param address TON Address
  * @returns StateInit if everythink Ok, otherwise null
  */
-export async function getStateInitByAddress(tonClient: TonClient, address: Address): Promise<{ code: Cell, data: Cell} | null> {
+export async function getStateInitByAddress(
+  tonClient: TonClient,
+  address: Address,
+): Promise<{ code: Cell; data: Cell } | null> {
   try {
     const contractState = await retry(() => tonClient.getContractState(address));
 
-    if (contractState.state == "uninitialized") {
-      return null
+    if (contractState.state == 'uninitialized') {
+      return null;
     }
 
-    const code = Cell.fromBase64(contractState.code?.toString("base64") as string);
-    const data = Cell.fromBase64(contractState.data?.toString("base64") as string);
+    const code = Cell.fromBase64(contractState.code?.toString('base64') as string);
+    const data = Cell.fromBase64(contractState.data?.toString('base64') as string);
 
     return { code, data };
   } catch {

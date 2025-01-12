@@ -20,16 +20,17 @@ import type { TonClient } from 'ton';
 import NavbarBlock from './components/NavbarBlock.vue';
 import FooterBlock from './components/FooterBlock.vue';
 
-declare module "@vue/runtime-core" {
+declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $tonConnectUI: TonConnectUI,
-    $tonClient: TonClient,
+    $tonConnectUI: TonConnectUI;
+    $tonClient: TonClient;
   }
 }
 
 export default {
   components: {
-    NavbarBlock, FooterBlock
-  }
-}
+    NavbarBlock,
+    FooterBlock,
+  },
+};
 </script>

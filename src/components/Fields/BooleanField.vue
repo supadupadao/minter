@@ -1,8 +1,16 @@
 <template>
-  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Boolean.HelpText')"
-    :error-text="errorText" :optional="true">
-    <input class="checkbox" type="checkbox" :placeholder="placeholder ?? $t('message.Fields.Boolean.Placeholder')"
-      v-model="checked">
+  <FieldLabelWrapper
+    :label="label"
+    :help-text="helpText ?? $t('message.Fields.Boolean.HelpText')"
+    :error-text="errorText"
+    :optional="true"
+  >
+    <input
+      class="checkbox"
+      type="checkbox"
+      :placeholder="placeholder ?? $t('message.Fields.Boolean.Placeholder')"
+      v-model="checked"
+    />
   </FieldLabelWrapper>
 </template>
 
@@ -14,20 +22,20 @@ import FieldLabelWrapper from './FieldLabelWrapper.vue';
 export default {
   extends: BaseField,
   components: {
-    FieldLabelWrapper
+    FieldLabelWrapper,
   },
   data() {
     return {
       checked: false,
-    }
+    };
   },
   methods: {
     validate(): boolean {
       return true;
     },
     store(builder: Builder): void {
-      builder.storeBit(this.checked)
-    }
-  }
-}
+      builder.storeBit(this.checked);
+    },
+  },
+};
 </script>
