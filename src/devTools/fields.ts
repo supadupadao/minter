@@ -10,29 +10,29 @@ export interface BaseFieldInput {
 export type AnyFieldInput = { type: 'any' };
 export type EmptyFieldInput = { type: 'empty' };
 export type TextFieldInput = { type: 'text' };
-export type CoinsFieldInput = { type: 'uint'; format: 'coins' } & BaseFieldInput;
-export type UintFieldInput = { type: 'uint'; format: number } & BaseFieldInput;
-export type IntFieldInput = { type: 'int'; format: number } & BaseFieldInput;
-export type StringFieldInput = { type: 'string' } & BaseFieldInput;
-export type CellFieldInput = { type: 'cell'; format: 'remaining' | null } & BaseFieldInput;
-export type SliceFieldInput = { type: 'slice'; format: 'remaining' | null } & BaseFieldInput;
-export type AddressFieldInput = { type: 'address' } & BaseFieldInput;
-export type BoolFieldInput = { type: 'bool' } & BaseFieldInput;
-export type UnknownFieldInput = { type: 'unknown'; expected: string } & BaseFieldInput;
+export type CoinsFieldInput = { type: 'coins' };
+export type UintFieldInput = { type: 'uint'; format: number };
+export type IntFieldInput = { type: 'int'; format: number };
+export type StringFieldInput = { type: 'string' };
+export type CellFieldInput = { type: 'cell'; format: 'remaining' | null };
+export type SliceFieldInput = { type: 'slice'; format: 'remaining' | null };
+export type AddressFieldInput = { type: 'address' };
+export type BoolFieldInput = { type: 'bool' };
+export type UnknownFieldInput = { type: 'unknown'; expected: string };
 
 export type InputItem =
   | AnyFieldInput
   | EmptyFieldInput
   | TextFieldInput
-  | CoinsFieldInput
-  | UintFieldInput
-  | IntFieldInput
-  | StringFieldInput
-  | CellFieldInput
-  | SliceFieldInput
-  | AddressFieldInput
-  | BoolFieldInput
-  | UnknownFieldInput;
+  | (CoinsFieldInput & BaseFieldInput)
+  | (UintFieldInput & BaseFieldInput)
+  | (IntFieldInput & BaseFieldInput)
+  | (StringFieldInput & BaseFieldInput)
+  | (CellFieldInput & BaseFieldInput)
+  | (SliceFieldInput & BaseFieldInput)
+  | (AddressFieldInput & BaseFieldInput)
+  | (BoolFieldInput & BaseFieldInput)
+  | (UnknownFieldInput & BaseFieldInput);
 
 export interface SimpleFieldParameters {
   name: string;
@@ -172,8 +172,7 @@ export class FieldsManager {
   public storeUint(type: SimpleFieldParameters) {
     if (type.format == 'coins') {
       this.fields.push({
-        type: 'uint',
-        format: 'coins',
+        type: 'coins',
         label: type.name,
         optional: type.optional,
       });
