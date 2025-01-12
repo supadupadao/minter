@@ -46,6 +46,8 @@ If you want to improve project documentation you can find documentation files in
 
 To preview your changes in Gitbook you need push your changes and open Pull Request. In PR checks there will be URL to your changes preview.
 
+<img width="862" alt="Docs preview URL" src="https://github.com/user-attachments/assets/addaf46e-dcde-4db0-8893-1444cbc201af" />
+
 # Anything else
 
 If someone you want to make is not described in this document feel free to open issue
