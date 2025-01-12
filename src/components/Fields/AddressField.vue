@@ -23,18 +23,20 @@ export default {
         return false;
       }
 
-      try {
-        Address.parse(this.value);
-      } catch {
-        this.errorText = this.$t("message.Fields.Errors.WrongAddress");
-        return false
+      if (this.value) {
+        try {
+          Address.parse(this.value);
+        } catch {
+          this.errorText = this.$t("message.Fields.Errors.WrongAddress");
+          return false
+        }
       }
 
       this.errorText = "";
       return true;
     },
     store(builder: Builder): void {
-      builder.storeAddress(Address.parse(this.value))
+      builder.storeAddress(this.value ? Address.parse(this.value) : null);
     }
   }
 }

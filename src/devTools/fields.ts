@@ -14,8 +14,8 @@ export type CoinsFieldInput = { type: "uint", format: "coins" } & BaseFieldInput
 export type UintFieldInput = { type: "uint", format: number } & BaseFieldInput;
 export type IntFieldInput = { type: "int", format: number } & BaseFieldInput;
 export type StringFieldInput = { type: "string" } & BaseFieldInput;
-export type CellFieldInput = { type: "cell" } & BaseFieldInput;
-export type SliceFieldInput = { type: "slice" } & BaseFieldInput;
+export type CellFieldInput = { type: "cell", format: "remaining" | null } & BaseFieldInput;
+export type SliceFieldInput = { type: "slice", format: "remaining" | null } & BaseFieldInput;
 export type AddressFieldInput = { type: "address" } & BaseFieldInput;
 export type BoolFieldInput = { type: "bool" } & BaseFieldInput;
 export type UnknownFieldInput = { type: "unknown", expected: string } & BaseFieldInput;
@@ -225,7 +225,8 @@ export class FieldsManager {
     this.fields.push({
       type: "cell",
       label: type.name,
-      optional: type.optional,
+      optional: type.optional || type.format == "remainder",
+      format: type.format == "remainder" ? "remaining" : null,
     });
   }
 
@@ -237,7 +238,8 @@ export class FieldsManager {
     this.fields.push({
       type: "slice",
       label: type.name,
-      optional: type.optional,
+      optional: type.optional || type.format == "remainder",
+      format: type.format == "remainder" ? "remaining" : null,
     });
   }
 

@@ -30,6 +30,10 @@
           </a>
 
           <div class="navbar-dropdown">
+            <a href="https://docs.supadupa.space/minter" class="navbar-item" target="_blank">
+              {{ $t('message.Navbar.Docs') }}
+            </a>
+
             <RouterLink to="/about" class="navbar-item">
               {{ $t('message.pageTitles.About') }}
             </RouterLink>

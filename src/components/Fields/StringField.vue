@@ -1,6 +1,6 @@
 <template>
   <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.String.HelpText')"
-    :error-text="errorText" :optional="true">
+    :error-text="errorText" :optional="optional">
     <input v-if="inputType == 'text'" class="input" type="text"
       :placeholder="placeholder ?? $t('message.Fields.String.Placeholder')" v-model="value" @input="validate" />
     <textarea v-else-if="inputType == 'textarea'" class="input"
@@ -36,7 +36,11 @@ export default {
       return true;
     },
     store(builder: Builder): void {
-      builder.storeRef(beginCell().storeStringRefTail(this.value).asCell())
+      if (this.optional) {
+        builder.storeMaybeRef(this.value ? beginCell().storeStringRefTail(this.value).asCell() : null);
+      } else {
+        builder.storeRef(beginCell().storeStringRefTail(this.value).asCell())
+      }
     }
   }
 }

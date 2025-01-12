@@ -1,6 +1,6 @@
 <template>
   <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Coins.HelpText')" :error-text="errorText"
-    :optional="true">
+    :optional="optional">
     <input class="input" type="number" :placeholder="placeholder ?? $t('message.Fields.Coins.Placeholder')"
       v-model="value" @input="validate">
   </FieldLabelWrapper>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     validate(): boolean {
-      if (!this.optional && !this.value) {
+      if (!this.optional && (!this.value && typeof this.value !== "number")) {
         this.errorText = this.$t("message.Fields.Errors.RequiredField");
         return false;
       }
@@ -47,7 +47,11 @@ export default {
       return true;
     },
     store(builder: Builder): void {
-      builder.storeCoins(parseInt(this.value));
+      if (this.optional) {
+        builder.storeMaybeCoins(this.value ? parseInt(this.value) : null);
+      } else {
+        builder.storeCoins(parseInt(this.value));
+      }
     }
   }
 }

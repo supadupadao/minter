@@ -8,7 +8,9 @@
           <div class="cell">
             <strong>{{ $t('message.Footer.OurLinks') }}:</strong>
             <br />
-            <a href="https://github.com/supadupadao">GitHub</a>
+            <a target="_blank" href="https://github.com/supadupadao/minter">GitHub</a>
+            <br />
+            <a target="_blank" href="https://docs.supadupa.space/minter">Docs</a>
           </div>
 
           <div class="cell">{{ $t('message.Footer.WebsiteLicense', { license: "AGPL 3.0" }) }}
