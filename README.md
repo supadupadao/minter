@@ -1,7 +1,7 @@
 # SupaDupaMinter
 
-[![Deploy status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/static.yml?label=deploy)](https://github.com/supadupadao/minter/actions/workflows/static.yml)
-[![Build status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/build.yml?label=build)](https://github.com/supadupadao/minter/actions/workflows/build.yml)
+[![Deploy status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/ci.yml?label=CI)](https://github.com/supadupadao/minter/actions/workflows/ci.yml)
+[![Build status](https://img.shields.io/github/actions/workflow/status/supadupadao/minter/cd.yml?label=deploy)](https://github.com/supadupadao/minter/actions/workflows/cd.yml)
 [![GitHub License](https://img.shields.io/github/license/supadupadao/minter)](https://github.com/supadupadao/minter/blob/master/LICENSE)
 
 ℹ️ Web application for deploying jettons and interacting with TON smart contracts.
