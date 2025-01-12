@@ -18,7 +18,8 @@ export default {
   },
   props: {
     format: {
-      type: String as () => "remaining"
+      type: String as () => "remaining" | null,
+      required: true,
     }
   },
   methods: {

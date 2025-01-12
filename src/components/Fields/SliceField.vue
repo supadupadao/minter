@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { Cell, Builder, beginCell } from 'ton-core';
+import { Cell, Builder } from 'ton-core';
 import BaseField from './BaseField.vue';
 import FieldLabelWrapper from './FieldLabelWrapper.vue';
 
@@ -18,7 +18,8 @@ export default {
   },
   props: {
     format: {
-      type: String as () => "remaining"
+      type: String as () => "remaining" | null,
+      required: true,
     }
   },
   methods: {
