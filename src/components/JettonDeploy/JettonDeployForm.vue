@@ -1,40 +1,59 @@
 <template>
   <form>
-    <StringField ref="jettonName" :label="$t('message.NewJettonForm.JettonName_Label')"
+    <StringField
+      ref="jettonName"
+      :label="$t('message.NewJettonForm.JettonName_Label')"
       :help-text="$t('message.NewJettonForm.JettonName_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonName_Placeholder')" :optional="false" />
+      :placeholder="$t('message.NewJettonForm.JettonName_Placeholder')"
+      :optional="false"
+    />
 
-    <StringField ref="jettonSymbol" :label="$t('message.NewJettonForm.JettonSymbol_Label')"
+    <StringField
+      ref="jettonSymbol"
+      :label="$t('message.NewJettonForm.JettonSymbol_Label')"
       :help-text="$t('message.NewJettonForm.JettonSymbol_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonSymbol_Placeholder')" :optional="false" />
+      :placeholder="$t('message.NewJettonForm.JettonSymbol_Placeholder')"
+      :optional="false"
+    />
 
-    <StringField ref="jettonDescription" :label="$t('message.NewJettonForm.JettonDescription_Label')"
+    <StringField
+      ref="jettonDescription"
+      :label="$t('message.NewJettonForm.JettonDescription_Label')"
       :help-text="$t('message.NewJettonForm.JettonDescription_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonDescription_Placeholder')" :optional="false"
-      input-type="textarea" />
+      :placeholder="$t('message.NewJettonForm.JettonDescription_Placeholder')"
+      :optional="false"
+      input-type="textarea"
+    />
 
-    <CoinsField ref="maxSupply" :label="$t('message.NewJettonForm.JettonMaxSupply_Label')"
+    <CoinsField
+      ref="maxSupply"
+      :label="$t('message.NewJettonForm.JettonMaxSupply_Label')"
       :help-text="$t('message.NewJettonForm.JettonMaxSupply_HelpText')"
-      :placeholder="$t('message.NewJettonForm.JettonMaxSupply_Placeholder')" :optional="false" />
+      :placeholder="$t('message.NewJettonForm.JettonMaxSupply_Placeholder')"
+      :optional="false"
+    />
 
     <div class="control">
-      <button class="button is-link" @click="deployToken">{{ $t("message.NewJettonForm.DeployJetton") }}</button>
+      <button class="button is-link" @click="deployToken">
+        {{ $t('message.NewJettonForm.DeployJetton') }}
+      </button>
     </div>
 
-    <p><span class="has-text-danger">*</span> - {{ $t("message.Common.requiredField") }}</p>
+    <p><span class="has-text-danger">*</span> - {{ $t('message.Common.requiredField') }}</p>
   </form>
 </template>
 
 <script lang="ts">
 import { Address, beginCell, Cell, contractAddress, toNano } from 'ton';
-import JettonMasterData from "@/assets/JettonMaster.json";
+import JettonMasterData from '@/assets/JettonMaster.json';
 import StringField from '../Fields/StringField.vue';
 import BaseField from '../Fields/BaseField.vue';
 import CoinsField from '../Fields/CoinsField.vue';
 
 export default {
   components: {
-    StringField, CoinsField
+    StringField,
+    CoinsField,
   },
   methods: {
     deployToken(payload: MouseEvent) {
@@ -47,7 +66,7 @@ export default {
         (this.$refs.jettonDescription as typeof BaseField).validate(),
         (this.$refs.maxSupply as typeof BaseField).validate(),
       ];
-      if (validations.filter(item => !item).length > 0) {
+      if (validations.filter((item) => !item).length > 0) {
         return false;
       }
 
@@ -74,30 +93,28 @@ export default {
         data: initData,
       });
 
-      this.$tonConnectUI.sendTransaction(
-        {
-          validUntil: Math.floor(Date.now() / 1000) + 360,
-          messages: [
-            {
-              address: address.toString(),
-              amount: toNano("0.1").toString(),
-              payload: jettonInit.toBoc().toString("base64"),
-              stateInit: beginCell()
-                .storeBit(false)
-                .storeBit(false)
-                .storeMaybeRef(codeCell)
-                .storeMaybeRef(initData)
-                .storeUint(0, 1)
-                .endCell()
-                .toBoc()
-                .toString("base64"),
-            }
-          ]
-        }
-      )
+      this.$tonConnectUI.sendTransaction({
+        validUntil: Math.floor(Date.now() / 1000) + 360,
+        messages: [
+          {
+            address: address.toString(),
+            amount: toNano('0.1').toString(),
+            payload: jettonInit.toBoc().toString('base64'),
+            stateInit: beginCell()
+              .storeBit(false)
+              .storeBit(false)
+              .storeMaybeRef(codeCell)
+              .storeMaybeRef(initData)
+              .storeUint(0, 1)
+              .endCell()
+              .toBoc()
+              .toString('base64'),
+          },
+        ],
+      });
 
       payload.preventDefault();
-    }
-  }
-}
+    },
+  },
+};
 </script>

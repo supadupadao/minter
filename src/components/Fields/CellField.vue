@@ -1,8 +1,17 @@
 <template>
-  <FieldLabelWrapper :label="label" :help-text="helpText ?? $t('message.Fields.Cell.HelpText')" :error-text="errorText"
-    :optional="optional">
-    <input class="input" type="text" :placeholder="placeholder ?? $t('message.Fields.Cell.Placeholder')" v-model="value"
-      @input="validate">
+  <FieldLabelWrapper
+    :label="label"
+    :help-text="helpText ?? $t('message.Fields.Cell.HelpText')"
+    :error-text="errorText"
+    :optional="optional"
+  >
+    <input
+      class="input"
+      type="text"
+      :placeholder="placeholder ?? $t('message.Fields.Cell.Placeholder')"
+      v-model="value"
+      @input="validate"
+    />
   </FieldLabelWrapper>
 </template>
 
@@ -14,18 +23,18 @@ import FieldLabelWrapper from './FieldLabelWrapper.vue';
 export default {
   extends: BaseField,
   components: {
-    FieldLabelWrapper
+    FieldLabelWrapper,
   },
   props: {
     format: {
-      type: String as () => "remaining" | null,
+      type: String as () => 'remaining' | null,
       required: true,
-    }
+    },
   },
   methods: {
     validate() {
-      if (!this.optional && !this.value && this.format !== "remaining") {
-        this.errorText = this.$t("message.Fields.Errors.RequiredField");
+      if (!this.optional && !this.value && this.format !== 'remaining') {
+        this.errorText = this.$t('message.Fields.Errors.RequiredField');
         return false;
       }
 
@@ -33,19 +42,19 @@ export default {
         try {
           Cell.fromBase64(this.value);
         } catch {
-          this.errorText = this.$t("message.Fields.Errors.InvalidBase64");
-          return false
+          this.errorText = this.$t('message.Fields.Errors.InvalidBase64');
+          return false;
         }
       }
 
-      this.errorText = "";
+      this.errorText = '';
       return true;
     },
     store(builder: Builder): void {
       if (this.value) {
         const value = Cell.fromBase64(this.value);
 
-        if (this.format == "remaining") {
+        if (this.format == 'remaining') {
           builder.storeSlice(value.asSlice());
           return;
         }
@@ -58,7 +67,7 @@ export default {
         builder.storeRef(value);
         return;
       } else {
-        if (this.format == "remaining") {
+        if (this.format == 'remaining') {
           return;
         }
 
@@ -67,7 +76,7 @@ export default {
           return;
         }
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

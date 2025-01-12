@@ -1,12 +1,10 @@
 name: Commit Lint
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
   merge_group:
-    types: [ checks_requested ]
+    types: [checks_requested]
 
 jobs:
   commitlint:

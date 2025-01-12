@@ -1,4 +1,4 @@
-import type { Address, Contract, ContractProvider } from "ton-core";
+import type { Address, Contract, ContractProvider } from 'ton-core';
 
 export class SupaDupaJettonMaster implements Contract {
   readonly address: Address;
@@ -18,7 +18,7 @@ export class SupaDupaJettonMaster implements Contract {
       mintable,
       adminAddress,
       content,
-      walletCode
+      walletCode,
     };
   }
 
@@ -30,7 +30,7 @@ export class SupaDupaJettonMaster implements Contract {
     const firstInterface = res.stack.readBigNumber();
     if (firstInterface !== 123515602279859691144772641439386770278n) {
       // TODO error handling
-      throw new Error("Invalid interfaces");
+      throw new Error('Invalid interfaces');
     }
     interfaces.push(firstInterface);
 

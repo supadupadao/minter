@@ -45,7 +45,7 @@
         "LinkText": "Если найдете ошибку, то откройте issue на Github"
       }
     },
-    "NewJettonCards":{
+    "NewJettonCards": {
       "WorkInProgress": {
         "Title": "Ведутся работы!",
         "Description": "Осторожно! Приложение использует <b>Testnet</b> сеть TON, потому что еще не готово на 100%. Мы активно работаем над этим.",

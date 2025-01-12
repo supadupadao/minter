@@ -1,7 +1,7 @@
-import type { TonConnectUI } from "@tonconnect/ui";
-import { beginCell, type ABIReceiver, type ABIType } from "ton-core";
-import { BaseDevTools } from "./base";
-import type { BaseFieldElement } from "@/components/Fields/FieldList.vue";
+import type { TonConnectUI } from '@tonconnect/ui';
+import { beginCell, type ABIReceiver, type ABIType } from 'ton-core';
+import { BaseDevTools } from './base';
+import type { BaseFieldElement } from '@/components/Fields/FieldList.vue';
 
 interface ReceiverDevToolsOptions {
   receiver: ABIReceiver;
@@ -24,7 +24,7 @@ export class ReceiverDevTools extends BaseDevTools {
     this.address = options.address;
     this.tonAmount = options.tonAmount;
 
-    if (options.receiver.message.kind == "typed") {
+    if (options.receiver.message.kind == 'typed') {
       const type = this.fields.findTypeByName(options.types, options.receiver.message.type);
       if (type) {
         this.header = type.header ?? undefined;
@@ -36,7 +36,7 @@ export class ReceiverDevTools extends BaseDevTools {
   }
 
   public override async execute(elements: BaseFieldElement[]): Promise<boolean> {
-    if (!await super.execute(elements)) {
+    if (!(await super.execute(elements))) {
       return false;
     }
 
@@ -50,18 +50,16 @@ export class ReceiverDevTools extends BaseDevTools {
       tx.store(el.store);
     }
 
-    await this.tonConnectUI.sendTransaction(
-      {
-        validUntil: Math.floor(Date.now() / 1000) + 360,
-        messages: [
-          {
-            address: this.address,
-            amount: this.tonAmount.toString(),
-            payload: tx.endCell().toBoc().toString("base64"),
-          }
-        ]
-      }
-    );
+    await this.tonConnectUI.sendTransaction({
+      validUntil: Math.floor(Date.now() / 1000) + 360,
+      messages: [
+        {
+          address: this.address,
+          amount: this.tonAmount.toString(),
+          payload: tx.endCell().toBoc().toString('base64'),
+        },
+      ],
+    });
 
     return true;
   }

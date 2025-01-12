@@ -1,4 +1,3 @@
-
 /**
  * Call `fn` function `retryCount` times until success
  * @param fn function that will be called `retryCount` times until success (at least 1 time)
@@ -10,7 +9,7 @@ export async function retry<R>(fn: () => R, retryCount: number = 10): Promise<R>
     try {
       return await fn();
     } catch {
-      continue
+      continue;
     }
   }
   return fn();

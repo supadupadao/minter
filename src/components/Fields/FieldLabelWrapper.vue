@@ -27,6 +27,6 @@ export default {
     errorText: {
       type: String,
     },
-  }
-}
+  },
+};
 </script>

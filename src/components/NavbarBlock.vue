@@ -5,8 +5,15 @@
         <p><i>SupaDupa</i><b>Minter</b></p>
       </a>
 
-      <a role="button" class="navbar-burger" v-bind:class="{ 'is-active': isBurgerActive }" @click="toggleBurgerActive"
-        data-target="navMenu" aria-label="menu" aria-expanded="false">
+      <a
+        role="button"
+        class="navbar-burger"
+        v-bind:class="{ 'is-active': isBurgerActive }"
+        @click="toggleBurgerActive"
+        data-target="navMenu"
+        aria-label="menu"
+        aria-expanded="false"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -56,17 +63,18 @@ import LocaleChoose from './LocaleChoose.vue';
 
 export default {
   components: {
-    ConnectWallet, LocaleChoose,
+    ConnectWallet,
+    LocaleChoose,
   },
   data() {
     return {
-      isBurgerActive: false
-    }
+      isBurgerActive: false,
+    };
   },
   methods: {
     toggleBurgerActive() {
       this.isBurgerActive = !this.isBurgerActive;
-    }
-  }
-}
+    },
+  },
+};
 </script>
