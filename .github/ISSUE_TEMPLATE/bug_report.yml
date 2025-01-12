@@ -14,27 +14,32 @@ body:
     attributes:
       label: To reproduce
       description: Steps to reproduce the behavior
-      placeholder: 1. Go to '...'
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
     validations:
       required: true
-  - type: dropdown
-    id: device
+  - type: textarea
+    id: actual
     attributes:
-      label: Device
-      description: What device are you using?
-      options:
-        - Desktop
-        - Mobile device
-      default: 0
+      label: Actual result 
+      description: What actually happened?
+      placeholder: Does not work
     validations:
       required: true
-  - type: dropdown
-    id: browsers
+  - type: textarea
+    id: expected
     attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
+      label: Expected result 
+      description: What did you expect to happen?
+      placeholder: Work
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: What device, OS and browser are you using?
+      placeholder: Desktop, Ubuntu, Mozila
