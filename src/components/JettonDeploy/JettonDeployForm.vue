@@ -33,6 +33,14 @@
       :optional="false"
     />
 
+    <CoinsField
+      ref="mintAmount"
+      :label="$t('message.NewJettonForm.MintAmount_Label')"
+      :help-text="$t('message.NewJettonForm.MintAmount_HelpText')"
+      :placeholder="$t('message.NewJettonForm.MintAmount_Placeholder')"
+      :optional="true"
+    />
+
     <div class="control">
       <button class="button is-link" @click="deployToken">
         {{ $t('message.NewJettonForm.DeployJetton') }}
@@ -86,6 +94,7 @@ export default {
         .store((this.$refs.jettonDescription as typeof BaseField).store)
         .store((this.$refs.jettonSymbol as typeof BaseField).store)
         .store((this.$refs.maxSupply as typeof BaseField).store)
+        .store((this.$refs.mintAmount as typeof BaseField).store)
         .endCell();
 
       const address = contractAddress(0, {

@@ -192,6 +192,10 @@
         {
           "name": "max_supply",
           "type": { "kind": "simple", "type": "uint", "optional": false, "format": "coins" }
+        },
+        {
+          "name": "mint_amount",
+          "type": { "kind": "simple", "type": "uint", "optional": true, "format": "coins" }
         }
       ]
     },
@@ -423,6 +427,7 @@
           "name": "current_supply",
           "type": { "kind": "simple", "type": "int", "optional": false, "format": 257 }
         },
+        { "name": "mintable", "type": { "kind": "simple", "type": "bool", "optional": false } },
         { "name": "owner", "type": { "kind": "simple", "type": "address", "optional": false } },
         {
           "name": "jetton_wallet_code",
@@ -442,8 +447,8 @@
   ],
   "receivers": [
     { "receiver": "internal", "message": { "kind": "typed", "type": "JettonInit" } },
-    { "receiver": "internal", "message": { "kind": "typed", "type": "JettonSetParameter" } },
     { "receiver": "internal", "message": { "kind": "typed", "type": "JettonMint" } },
+    { "receiver": "internal", "message": { "kind": "typed", "type": "JettonSetParameter" } },
     { "receiver": "internal", "message": { "kind": "typed", "type": "JettonBurnInternal" } },
     { "receiver": "internal", "message": { "kind": "typed", "type": "ProvideWalletAddress" } },
     { "receiver": "internal", "message": { "kind": "typed", "type": "Deploy" } },
