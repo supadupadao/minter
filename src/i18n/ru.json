@@ -82,6 +82,9 @@
       "JettonMaxSupply_Label": "Максимальный саплай",
       "JettonMaxSupply_Placeholder": "100500",
       "JettonMaxSupply_HelpText": "Как много токенов будет позволено сминтить",
+      "MintAmount_Label": "Начальный минт",
+      "MintAmount_Placeholder": "322",
+      "MintAmount_HelpText": "Сколько токенов будет созданно изначально",
       "DeployJetton": "Деплой 🚀",
       "SearchFormTitle": "Управление жетоном"
     },

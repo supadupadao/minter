@@ -82,6 +82,9 @@
       "JettonMaxSupply_Label": "Max supply",
       "JettonMaxSupply_Placeholder": "1337",
       "JettonMaxSupply_HelpText": "How many tokens will be allowed to mint",
+      "MintAmount_Label": "Mint amount",
+      "MintAmount_Placeholder": "322",
+      "MintAmount_HelpText": "How many tokens will be initially minted",
       "DeployJetton": "Deploy 🚀",
       "SearchFormTitle": "Manage your jetton"
     },
